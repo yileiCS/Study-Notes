@@ -1,8 +1,9 @@
 # Markdown Learning Notes
 
 
-## 1. Learning Videos:
+## 1. Learning Materials:
 - [LinkedIn Learning - Learning Markdown](https://www.linkedin.com/learning/learning-markdown?u=69919578)
+- [Basic syntax](https://www.markdownguide.org/basic-syntax/)
 
 ---
 
@@ -114,11 +115,35 @@ Use ```-```, ```*```, or ```+``` to create unordered list items.
 
 
 ### (6). Blockquote
-Create blockquotes with the ```>``` symbol:
-> "The Markdown Guide is a free and open-source reference guide that explains how to use Markdown, the simple and easy-to-use markup language you can use to format virtually any document".
-```
-> "The Markdown Guide is a free and open-source..."
-```
+Create blockquotes with the ```>``` symbol
+- One paragraph
+  > "The Markdown Guide is a free and open-source reference guide that explains how to use Markdown, the simple and easy-to-use markup language you can use to format virtually any document".
+  ```
+  > "The Markdown Guide is a free and open-source..."
+  ```
+- Multiple paragraphs
+  > "The Markdown Guide is a free and open-source reference guide that explains how to use Markdown, the simple and easy-to-use markup language you can use to format virtually any document".
+  > 
+  > "Markdown is a lightweight markup language for creating formatted text using a plain-text editor. John Gruber created Markdown in 2004 as an easy-to-read markup language."
+  ```
+  > "The Markdown Guide is a free and open-source reference guide that explains how to use Markdown, the simple and easy-to-use markup language you can use to format virtually any document".
+  > (blank line)
+  > "Markdown is a lightweight markup language for creating formatted text using a plain-text editor. John Gruber created Markdown in 2004 as an easy-to-read markup language."
+  ```
+- Nested Blockquotes
+  > "The Markdown Guide is a free and open-source reference guide that explains how to use Markdown, the simple and easy-to-use markup language you can use to format virtually any document".
+  >> "Markdown is a lightweight markup language for creating formatted text using a plain-text editor. John Gruber created Markdown in 2004 as an easy-to-read markup language."
+  ```
+  > "The Markdown Guide is a free and open-source reference guide that explains how to use Markdown, the simple and easy-to-use markup language you can use to format virtually any document".
+  >> "Markdown is a lightweight markup language for creating formatted text using a plain-text editor. John Gruber created Markdown in 2004 as an easy-to-read markup language."
+  ```
+- Blockquotes with other elements and setting
+   > ### Markdown Introduction
+   > - What is <u>Markdown</u>
+   > - Basic syntax
+   > - Write markdown in *VScode*
+   >
+   > "The Markdown Guide is a free and open-source reference guide that explains how to use Markdown, the simple and easy-to-use markup language you can use to format virtually any document".
 
 ### (7). Code
 - Inline code uses backticks ``` ` ```:
@@ -157,6 +182,19 @@ Create blockquotes with the ```>``` symbol:
   ```
   [Google](https://www.google.com "Click to visit Google")
   ```
+- email
+  - fake@example.com
+  ` <fake@example.com> `
+- Formatting links
+  - I love supporting the **[EFF](https://eff.org)**.
+  - This is the *[Markdown Guide](https://www.markdownguide.org)*.
+  - See the section on [`code`](#code).
+  ```
+  I love supporting the **[EFF](https://eff.org)**.
+  This is the *[Markdown Guide](https://www.markdownguide.org)*.
+  See the section on [`code`](#code).
+  ```
+
 
 ### (9). Images
 Images are similar to links but start with an exclamation mark ``` ! ```:
