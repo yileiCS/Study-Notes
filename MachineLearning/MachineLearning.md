@@ -1,6 +1,5 @@
 # MACHINE LEARNING Study Notes
 
----
 ## Some terminologies
 
 | **_Supervised Learning_**       | **_Unsupervised Learning_**                                |
@@ -11,13 +10,47 @@
 | Support Vector Machines         |                                                            |
 | Neural Networks                 |                                                            |  | Dimensionality Reduction - Principal component analysis |
 
-- 监督学习：模型从标记的训练数据中学习，即每个训练样本都有一个与之对应的输出标签。模型的目标是学习输入特征和输出标签之间的关系，以便能够对新的、未见过的数据做出准确的预测。常见的监督学习任务包括**分类**和**回归**。
-- 无监督学习：模型处理的是未标记的数据，即没有明确的输出标签。模型的目标是**发现数据中的结构和模式**，如聚类或降维。无监督学习常用于探索性数据分析和特征学习。
+
+**<u>监督学习**</u>：
+- The model learns from labeled training data
+- Common superviesd learning tasks include: **Classification** and **Regression**
+- For supervised learning the training data always contains labels
+  - Each training data always contains labels
+  - This label is a **known output** or **target value** used to guide the model's learning process
+  - Labels can be **numeric 数值型**
+    - When the label is numeric, the supervised learning task is usually referred to as a **Regression** problem
+  - Labels can be **categorical 类别型**
+    - When the label is categorical, the supervised learning task is usually referred to as a **Classification** problem, where the model's goal is to predict a **discrete category** (离散的类别)
+- Model objective：to learn the relationship between **input features and output labels**，so as to make accurate predictions on new, unseen data
+- Data can be anything 数据可以是任何类型 ➡️ 监督学习可以处理各种类型的输入数据
+  - Numbers (数值)：e.g. age, price, measurements
+  - Categories (类别)： e.g. gender, color, country
+  - Images (图像)： e.g. medical imaging, satellite imagery, photographs
+  - Text (文本)： e.g. reviews, articles, social media posts
+- Common supervised learning algorithms:
+  - **Linear & Logistic Regression**
+    - Linear Regression: used for predicting continuous numeric labels
+    - Logistic Regression: used for classification problems, predicting categorical labels
+  - **Decision Trees & Random Forests**
+    - Decision Trees: tree-like structures used for classification and regression tasks
+    - Random Forests: ensembles of multiple decision trees, used to **improve the accuracy and robustness of the model**
+  - **Boosting & Bagging**
+    -  Boosting: an ensemble technique that **combines multiple weak classifiers to create a strong classifier** (通过组合多个弱分类器来创建一个强分类器)
+    -  Bagging: an ensemble technique that **reduces variance by creating multiple copies of the training set and training multiple models** (通过创建多个训练集的副本并训练多个模型来减少方差)
+  - **Support Vector Machines**
+    - abbre. SVM
+    - a powerful classification algorithm
+    - can be used for regression (known as Support Vector Regression, SVR)
+  - **Neural Networks**
+    - models inspired by the structure of the human brain and can be used for various complex classification and regression tasks
+
+**<u>无监督学习**</u>：模型处理的是未标记的数据，即没有明确的输出标签。模型的目标是**发现数据中的结构和模式**，如聚类或降维。无监督学习常用于探索性数据分析和特征学习。
 
 **Semi or Self Supervised Learning**
 - Partially labelled data
 - Usually combines supervised and unsupervised algorithm
 
+---
 **Batch Learning**
 - A large mount of data is available at once
 - Train offline and then use in production
@@ -32,10 +65,11 @@
   - Balance between learning changes quickly and forgetting old data
 - Need careful monitoring of performance
 
-**批量学习**：模型在训练阶段一次性处理整个训练数据集。训练完成后，模型参数固定，不再更新，直到下一次重新训练。这种方法适用于**数据集大小适中且数据分布稳定**的情况。
+**<u>批量学习</u>**：模型在训练阶段一次性处理整个训练数据集。训练完成后，模型参数固定，不再更新，直到下一次重新训练。这种方法适用于**数据集大小适中且数据分布稳定**的情况。
 
-**在线学习**：在接收到新数据时即时更新。这种方法适用于**数据流或实时应用**，其中数据不断到来，模型需要**快速适应新信息**。
+**<u>在线学习</u>**：在接收到新数据时即时更新。这种方法适用于**数据流或实时应用**，其中数据不断到来，模型需要**快速适应新信息**。
 
+---
 **Instance Based Learning**
 - Learn the known data
 - Measure similarity of new data to known data
