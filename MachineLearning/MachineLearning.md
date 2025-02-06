@@ -248,10 +248,9 @@ Validation techniques (cross-validation, hold-out validation) **provide reliable
   
 【K-Fold Cross-Validation vs. Train-Test Split】
 - Train-Test Split (Image by Vinod Chugani)
-<img src="pic_ML/test_split_illustration.png" style="width: 100%; max-width: 90%" />
+  - ![Train-Test Split (Image by Vinod Chugani)](pic_ML/test_split_illustration.png)
 - K-Fold Cross-Validation (Image by Vinod Chugani)
-<img src="pic_ML/5-Fold_Cross-Validation.png" style="width: 100%; max-width: 90%" />
-
+  - ![K-Fold Cross-Validation (Image by Vinod Chugani)](pic_ML/5-Fold_Cross-Validation.png)
 [A Comprehensive Guide to K-Fold Cross Validation](https://www.datacamp.com/tutorial/k-fold-cross-validation)
 
 
