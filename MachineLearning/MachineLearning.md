@@ -248,9 +248,9 @@ Validation techniques (cross-validation, hold-out validation) **provide reliable
   
 【K-Fold Cross-Validation vs. Train-Test Split】
 - Train-Test Split (Image by Vinod Chugani)
-![Test Split Illustration. Image by Vinod Chugani](pic_ML/test_split_illustration.png)
+<img src="pic_ML/test_split_illustration.png" style="width: 100%; max-width: 90%" />
 - K-Fold Cross-Validation (Image by Vinod Chugani)
-![5-Fold Cross-Validation. Image by Vinod Chugani](pic_ML/5-Fold_Cross-Validation.png)
+<img src="pic_ML/5-Fold_Cross-Validation.png" style="width: 100%; max-width: 90%" />
 
 [A Comprehensive Guide to K-Fold Cross Validation](https://www.datacamp.com/tutorial/k-fold-cross-validation)
 
@@ -344,12 +344,25 @@ Fine-tuning involves the process of adjusting the hyperparameters of a model to 
   - Objective: Clean and preprocess the data to make it suitable for modelling
   - Activities: Handle missing values, remove duplicates, normalize or standardize data (对数据进行归一化或标准化), and perform feature engineering.
 - Select and train a model
-- Fine tune model
+- Fine-tune model
   - Objective: Optimize the model's performance by adjusting hyperparameters
-  - Activities: Use techniques like grid search or random search to find the best hyperparameters, and validate the model's performance using the validation se
+  - Activities: Use techniques like grid search or random search to find the best hyperparameters, and validate the model's performance using the validation set
 - Present your solution
   - Objective: Communicate the model's performance and insights to stakeholders
   - Activities: Prepare a presentation or report that explains the model's performance, key insights, and business implication
 - Launch, monitor and maintain model
   - Objective: Deploy the model into production and ensure it continues to perform well over time
   - Activities: Deploy the model, set up monitoring systems to track its performance, and perform regular maintenance and updates as needed
+
+#### **Frame the solution** 
+- Supervised / Unsupervised
+  - 监督学习：使用带标签的数据训练模型，每个样本都有对应的输出标签，目标是学习输入特征与输出标签之间的映射关系，进行准确预测。常见任务包括分类和回归。
+  - 无监督学习：使用没标签的数据，目标是发现数据中的结构和模式，常见任务包括聚类和降维。
+- online / offline
+  - 在线学习：模型在接收到新数据时立即更新，适用于数据流不断更新的场景，需要处理数据的顺序性和实时性。
+  - 离线学习：模型在训练阶段使用整个数据集进行学习，训练完成后不再更新，适用于数据集相对静态的场景，便于管理和复现。
+- classification / regression
+  - 分类：预测离散的类别标签，输出是有限的类别集合。
+  - 回归：预测连续的数值，输出是一个连续的数值范围。
+- How will solution be used
+  - 确定模型的类型和学习方式后，考虑解决方案的具体应用场景，包括模型的部署方式、用户交互方式以及模型的维护和更新策略。
