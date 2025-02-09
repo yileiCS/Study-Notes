@@ -251,6 +251,7 @@ Validation techniques (cross-validation, hold-out validation) **provide reliable
   - ![Train-Test Split (Image by Vinod Chugani)](pic_ML/test_split_illustration.png)
 - K-Fold Cross-Validation (Image by Vinod Chugani)
   - ![K-Fold Cross-Validation (Image by Vinod Chugani)](pic_ML/5-Fold_Cross-Validation.png)
+
 [A Comprehensive Guide to K-Fold Cross Validation](https://www.datacamp.com/tutorial/k-fold-cross-validation)
 
 
@@ -284,11 +285,24 @@ Fine-tuning involves the process of adjusting the hyperparameters of a model to 
 
 ---
 ### **Notation**
-- <img src="pic_ML/Notation.png" style="width: 100%; max-width: 50%" />
+- We use upper case bold letters for matrices, \(\mathbf{A}, \mathbf{B}, \mathbf{C}, \mathbf{X}, \ldots\)
+- Matrix elements: corresponding lowercase with two indices \(a_{mq}, b_{rs}, c_{tu}, x_{ij}, \ldots\)
+- for the “data matrix” or the “feature matrix” \(\mathbf{X}\)
+  - \(x_{ij}\) is the element in row \(i\) and column \(j\) of the matrix \(\mathbf{X}\)
 - Columns contain features / variables
   - <img src="pic_ML/features.png" style="width: 40%; max-width: 50%" />
 - Rows contain observations
-  - <img src="pic_ML/Observations.png" style="width: 100%; max-width: 50%" />
+  - X = 
+$$
+\begin{pmatrix}
+X_{11} & X_{12} & \cdots & X_{1p} \\
+X_{21} & X_{22} & \cdots & X_{2p} \\
+\vdots & \vdots & \ddots & \vdots \\
+X_{n1} & X_{n2} & \cdots & X_{np}
+\end{pmatrix}
+$$
+
+
 
 **矩阵**
 - 定义: 矩阵用大写加粗字母表示，例如 A,B,C,X,…。
@@ -365,3 +379,340 @@ Fine-tuning involves the process of adjusting the hyperparameters of a model to 
   - 回归：预测连续的数值，输出是一个连续的数值范围。
 - How will solution be used
   - 确定模型的类型和学习方式后，考虑解决方案的具体应用场景，包括模型的部署方式、用户交互方式以及模型的维护和更新策略。
+
+#### **Performance** 
+- Measure the performance
+  - Select appropriate evaluation metrics based on the task type
+    - For classification, use metrics like accuracy, precision, recall, and F1-score
+    - For regression, use metrics like Mean Squared Error (MSE) or R-squared
+- Minimum Performance
+  - Set a baseline or threshold that the model must meet to be considered successful, based on business requirements or existing solutions
+- Does the performance meet the business objective?
+  - Ensure the model’s performance aligns with the business goals. If the model doesn’t help achieve these goals, it may not be useful despite good metrics.
+
+
+#### **Data Exploration** 
+- Use the TRAINING SET for exploration
+- What is your validation strategy?
+  - Common strategies include hold-out validation and cross-validation. This helps prevent overfitting and ensures the model generalizes well.
+- Study each attribute and its characteristics
+- Record your data exploration
+- Study each attribute and its characteristics
+  - Name, description, what does it mean? 
+    - Understand the name and description of each attribute to grasp what the data represents. This is like knowing what each column in your dataset stands for.
+  - Type, categorical (Does it have an order?), numerical (int/float), text, etc.
+    - Identify the type of each attribute. For example, categorical data might need encoding, while numerical data might require normalization.
+- Missing values
+  - can affect the model's performance. Decide how to handle them, whether to impute or remove
+- Noisiness and type of noise
+  - Understand the type of noise in the data to decide how to clean it. For example, outliers might need to be addressed differently than random noise
+- Usefulness
+  - Assess whether an attribute is useful for the model. Sometimes, certain features might not contribute to the prediction and can be removed to simplify the model
+- Distribution
+  - Understand data distribution to choose the right model and identify any skewness (偏斜) or outliers (异常值) that might need attention
+- Is it a unique identifier?
+  - Identify if an attribute is a unique identifier, as such attributes usually don't provide predictive power and can be excluded from the model
+- Identify target attribute/response variable (supervised learning)
+  - In supervised learning, determine what you're trying to predict. This is the target variable, and all other variables are features that help in predicting it.
+- Visualise the data
+  - to understand patterns, relationships, and distributions
+  - can be done through plots, histograms, scatter plots, etc.
+- Notice any useful relationships
+  - to gain insights into which features are important for the model
+- Identify any useful transformations
+  - transforming data (like log transformation) can improve model performance by making relationships more linear or stabilizing variance
+- How would you solve this manually
+  - Think about how to approach the problem without a model to provide a baseline or validate the model's predictions
+- Identify any useful extra data
+  - Adding more relevant data can improve model performance
+  - Identify what extra data might be useful as part of the exploration process
+
+#### **Data Wrangling** 
+**Prepare the Data**
+- Keep the original data intact
+  - ensures that you can revert to the original data if needed and prevents data loss or corruption
+- Use functions to transform the data
+  - By using functions to apply the same data transformations to new data, ensuring consistency and reducing the risk of errors
+  - Reproducibility
+    - Functions make the data preparation process reproducible, which is crucial for debugging and validating results (函数使数据准备过程可复现，便于调试和验证结果)
+  - Transferrable across projects
+    - The functions and transformations can be reused in other projects, saving time and effort
+  - Optimise processing as hyper parameters
+    - Some data transformations can be optimized as hyperparameters, allowing you to fine-tune the data preparation process to improve model performance
+
+**Data Cleaning**
+- Outliers
+  - Data collection errors (fix / remove)
+    - Identify and correct/remove outliers caused by data collection errors
+    - This ensures that the data is accurate and reliable
+  - Are they necessary? Think back to business objectives
+    - Determine if outliers are necessary for the business objectives
+    - If not, consider removing to avoid skewing the analysis (避免分析结果偏差)
+- Missing data
+  - Drop observations
+    - Remove observations with missing data if the amount of missing data is small and the data is missing completely at random (MCAR)
+  - Drop features
+    - Remove features with a high percentage of missing values if they are not critical to the analysis
+  - Fill in values
+    - Impute missing values using methods such as mean, median, mode, or more sophisticated techniques like KNN or multiple imputation
+- Feature Selection
+  - Select the most relevant features that contribute to the predictive power of the model, helps in reducing the dimensionality of the data and improving model performance
+- Feature Engineering
+  - Discretise continuous features (离散化连续特征)
+    - Convert continuous features into **categorical bins** (分类区间) to capture non-linear relationships and reduce the impact of outliers
+  - Decompose text, categories (分解文本、类别)
+    - Break down text and categorical features into more manageable and meaningful components, such as word counts, n-grams, or one-hot encoding
+  - Transform numerical (转换数值)
+    - Apply transformations to numerical features to improve their distribution, such as logarithmic, square root, or reciprocal transformations
+  - Aggregate (聚合)
+    - Combine features to create new features that capture more complex relationships, such as sum, mean, or count aggregations
+- Feature Scaling (特征缩放)
+  - Scale features to ensure they are on a similar scale, which can improve the performance of many ML algorithms
+    - Center / standardise / normalise: Centering (subtracting the mean) and standardizing (dividing by the standard deviation) or normalizing (scaling to a specific range) are common techniques to achieve this <div style="color: grey; ">中心化/标准化/归一化: 中心化（减去均值）和标准化（除以标准差）或归一化（缩放到特定范围）是常见的技术</div>
+
+#### **Train the Select Models** 
+- Train different models with standard parameters
+  - Train various models (e.g., linear regression, decision trees, neural networks) using their default settings to establish a baseline performance
+  - Assess using validation: Evaluate the models using validation techniques (e.g., cross-validation) to estimate their generalization performance on unseen data
+  - Fine tune a small number of hyperparameters: Adjust a few hyperparameters to optimize model performance, focusing on key settings that can significantly improve results
+- Find significant variables
+  - Identify the most important features or variables that contribute to the model's predictions, enhancing model interpretability and performance
+- Examine errors in models
+  - to understand their limitations and areas for improvement, which can guide further adjustments
+  - Try some feature selection/engineering to adjust errors
+    - Refine the feature set or engineer new features based on the identified errors to better capture the underlying patterns in the data
+- Select most promising model/models to fine tune
+  - Focus on the models showing the most potential for further optimization, refining their hyperparameters and possibly combining them for improved performance.
+- Can use a subset of data, but penalises complex models
+  - Use a subset of the data during initial stages, but adjust for this by penalizing complex models to prevent overfitting
+
+#### **Fine Tune the System** 
+- Fine tune hyper parameters including preprocessing
+  - Hyper Parameters
+    - parameters whose values are set prior to the commencement of the learning process
+    - e.g. the learning rate, the number of layers in a neural network, the depth of a decision tree, etc.
+  - Preprocessing
+    - involves transforming raw data into a format that is more suitable for the model to process
+    - common preprocessing steps include normalization, standardization, encoding categorical variables, handling missing values, etc.
+  - Fine Tuning
+    - adjusting hyperparameters and preprocessing steps to optimize the model's performance
+    - typically done using a validation set to evaluate the impact of different settings
+- Try ensemble methods
+  - Ensemble Methods
+    - techniques that combine multiple models to improve the overall performance. e.g. bagging, boosting, stacking, etc.
+  - Bagging
+    - Reduces variance by training multiple models on different subsets of the data and averaging their predictions <div style="color: grey; ">通过在不同的数据子集上训练多个模型并对其预测进行平均来减少方差</div>
+  - Boosting
+    - Reduces bias by training models sequentially, where each model focuses on the errors of the previous ones
+  - Stacking
+    - Combines predictions from multiple models to make a final prediction, often using a meta-model to weigh the predictions
+- Measure performance of final model on test dataset
+  - Test Dataset
+    - A portion of the data that is held back and not used during training or validation
+    - It is used to provide an unbiased evaluation of the final model's performance
+  - Performance Metrics
+    - Depending on the task, metrics such as accuracy, precision, recall, F1 score, ROC-AUC, mean squared error, etc., are used to evaluate the model
+  - Final Evaluation
+    - After fine-tuning the model and possibly using ensemble methods, the final model is evaluated on the test dataset to get an estimate of its performance on unseen data
+
+Present the solution
+- Remember big picture from step 1
+- How the model meets business objective
+- Describe interesting findings along the way
+  - Limitations and assumptions
+  - Document best solution in detail
+  - Briefly describe what solutions were rejected and why.
+- Present clear statements and/or visuals of key findings
+
+### **Fine Tune the System** 
+#### **<u>Regression</u>**
+- Regression is predicting a number.
+- We could calculate the sum of the differences between the real and predicted values
+  - Real value \( y_i \) (实际值)
+  - Predicted value = \( \hat{y}_i \) (预测值)
+  - n: 样本数量
+  - \( \sum_{i=1}^{n} (y_i - \hat{y}_i) \)
+- Sum of value squared \(\sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^{2}\)
+  - Residual sum of squares (RSS)
+  - Sum of square errors (SSE)
+- Sum of absolute values \(\sum_{i=1}^{n} \left|y_{i} - \hat{y}_{i} \right|\)
+- 
+- <mark>**MSE</mark> = <mark>\( \frac{1}{n} \sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^{2} \)**</mark>  ➡️ Mean Squared Error 均方误差
+  - 作用：用于<mark>衡量模型的预测精度，值越小说明模型预测越准确<mark>
+- <mark>**RMSE</mark> = <mark>\( \sqrt{\frac{1}{n} \sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^{2}} \)**</mark>  ➡️  
+    - Root Mean Square Error (RMSE), 均方根误差, 是回归模型评估的核心指标之一
+- MSE 和 RMSE 都涉及误差的平方，因此对异常值（即远离平均值的点）非常敏感。异常值会导致误差平方增大，从而显著影响 MSE 和 RMSE 的值
+- RMSE 是通过取 MSE 的平方根，将误差值转换到与原始数据相同的量纲上，从而便于理解和比较误差的大小
+- 
+- <mark>**Euclidean norm, \( L_2 \) norm, \( ||\cdot||_2 \)**</mark>
+  - \( L_2 \) 范数：数学上对欧几里得范数的另一种称呼，定义为向量各元素平方和的平方根
+  - Euclidean norm (欧几里得范数) ➡️ The Euclidean norm is the square root of the sum of the squares of the vector elements, used to measure the length or magnitude of a vector <div style="color: grey;">向量空间中向量长度的计算公式 （如向量的几何距离</div>
+  - 在机器学习中的应用
+    - 用于<mark>正则化（如岭回归），防止模型过拟合</mark>
+    - <mark>RMSE本质上利用了\( L_2 \) 范数计算误差</mark>
+- Outliers have more influence
+- 
+- <mark>**MAE</mark> = <mark>\(\frac{1}{n}\sum_{i=1}^{n} \left|y_{i} - \hat{y}_{i} \right|\)**</mark>
+- MAE: Mean Absolute Error  (平均绝对误差)
+- MAE 是预测误差的绝对值的平均值，能够反映预测值与实际值之间的平均绝对差
+- 
+- <mark>**Manhattan norm, \( L_1 \) norm, \( ||\cdot||_1 \)**</mark>
+- The Manhattan norm is the sum of the absolute values of the vector elements, used to measure the length or magnitude of a vector <div style="color: grey;">曼哈顿范数是向量元素绝对值的和，用于衡量向量的长度或大小</div>
+- In error metric, the Manhattan norm corresponds to MAE <div style="color: grey;">在误差度量中，曼哈顿范数对应于 MAE
+- Since MAE involves only the absolute values or errors, not their squares, it is less sensitive to outliers. Outliers do not significantly increase the value of MAE because MAE does not amplify errors <div style="color: grey;">由于 MAE 只涉及误差的绝对值，而不是平方值，因此对异常值的敏感度较低。异常值不会显著增加 MAE 的值，因为 MAE 不会放大误差
+- 
+- <mark>**\( R^2 \)**</mark> ：R squared (多重决定系数)
+  - \( R^2 = 1 - \frac{SSE}{SST} = 1 - \frac{\sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^2}{\sum_{i=1}^{n} \left(y_{i} - \bar{y} \right)^2} \)
+  - Sum of squares total (SST), \( \sum_{i=1}^{n} \left(y_{i} - \bar{y} \right)^2 \)
+  - SSE: 误差平方和； SST: 总平方和
+  - \( y \) bar, \( \bar{y} \), mean of real values  ➡️  \( \bar{y} \)是所有实际值的平均值，用于计算 SST
+  - Coefficient of multiple determination
+  - \( R^2 \) 用于评估回归模型的拟合优度
+  - \( R^2 \) 是一个介于 0 和 1 之间的值，表示模型解释的变异量占总变异量的比例。值越接近 1，表示模型拟合得越好
+
+
+---
+### **Classification**
+- Classification can either be
+  - binary (2 classes)
+  - multiclass (more than 2 classes)
+- Some methods of measuring performance can be used for both
+  - Some are either binary only or multiclass only
+- First we look at methods that can be used for either
+
+#### **<u>Confusion Matrix</u>**
+- Can be any number of classes
+- Do not need to be ordered (low, med, high)
+
+##### Accuracy
+- The percentage of correct answers
+- <mark>**Accuracy = \( \frac{correct}{total} \)**</mark>
+  
+#### **<u>Binary Classification</u>**
+- Only two categories
+- Predict positive, actual class positive, true positive, \(TP\)
+- Predict positive, actual class negative, false positive, \(FP\), type I errors
+- Predict negative, actual class negative, true negative, \(TN\)
+- Predict negative, actual class positive, false negative, \(FN\), type II errors
+
+<mark>**Accuracy = \( \frac{TP+TN}{TP+FP+FN+TN} \)**</mark>
+
+<mark>**Recall = \( \frac{TP}{TP+FN} \)**</mark>
+- Recall, also known as:
+  - Sensitivity
+- Hit rate
+- True Positive Rate (TPR)
+- Percent of actual positives that are correct <div style="color: grey;"> 召回率是指在所有实际为正类的样本中，被模型正确识别的比例。
+- Higher recall indicates fewer false negatives <div style="color: grey;">召回率越高，表示模型的漏报（False Negatives）越少
+
+<mark>**Precision = \( \frac{TP}{TP+FP} \)**</mark>
+- Precision, also known as:
+  - Positive Predictive Value (PPV)
+- Percentage of positive predictions that are correct
+- Precision is the proportion of correctly identifies positive samples among all samples identified as positive by the model <div style="color: grey; ">精确率是指在所有被模型正确识别为正类的样本中，实际为正类的比例<div>
+- Higher precision indicates fewer false positives <div style="color: grey; ">精确率越高，表示模型的误报（False Positives）越少
+
+<mark>**Specificity = \( \frac{TN}{TN+FP} \)**</mark>
+- Specificity, also known as:
+  - Selectivity
+  - True Negative Rate (TNR)
+- Percent of actual negatives that are correct
+- False Positive Rate = \( \frac{FP}{TN+FP} \)
+- False Positive Rate, also known as:
+  - Fall out
+  - Probability of false alarm
+- Percent of actual negatives that are incorrect
+
+<mark>**\( F_1 \) score**</mark>
+<mark>**\( F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}} \)**</mark>
+- Harmonic mean of precision and recall ➡️ ensure that the model performs well on both metrics <div style="color: grey; "> 精确度和召回率的调和平均值, 以评估模型的整体性能</div>
+- F1 是在分类问题中常用的评估指标，特别是在需要同时考虑 precision 和 recall 的情况下
+- F1 attempts to balance these two metrics to evaluate the overall performance of the model <div style="color: grey; ">试图在precision和recall两个指标间找到平衡，以评估模型的整体性能</div>
+- Needs high precision and recall
+  
+  
+The output types of a binary classifier
+- Predictions
+- Scores
+
+<mark>**Predictions**</mark>
+- Refer to the classifier directly outputting a class label <div style="color: grey; ">分类器直接输出一个类别标签</div>
+- For binary classification problems, the output is typically "True" or "False", "Yes" or "No", "0" or "1" <div style="color: grey; ">对于二元分类问题，输出通常是“是”或“否”、“真”或“假”、“0”或“1”</div>
+- Suitable for scenarios where a clear classification result is needed, such as spam email detection (spam/non-spam)<div style="color: grey; ">适用于需要明确分类结果的场景，例如垃圾邮件检测（垃圾邮件/非垃圾邮件）</div>
+
+<mark>**Scores**</mark>
+- Refers to the classifier outputting a **continuous value** representing the **probability** or **confidence** that a sample belongs to a certain class<div style="color: grey; ">分数是指分类器输出一个连续值，表示样本属于某一类别的概率或置信度
+- The range of scores can be from **negative infinity** to **positive infinity**, or from **0 to 1**. For example, logistic regerssion models typically output a probability value between 0 and 1<div style="color: grey; ">分数的范围可以是从负无穷到正无穷，或者从0到1。例如，逻辑回归模型通常会输出一个介于0和1之间的概率值
+- Suitable for scenarios where the confidence of classification is needed, or where scores need further processing, such as setting a threshold for classfication <div style="color: grey; ">这种输出方式适用于需要了解分类置信度的场景，或者需要进一步处理分数的情况，如设置阈值进行分类
+
+<mark>**Receiver Operator Characteristic (ROC) Curve**</mark>
+ ![ROC](pic_ML/ROC.png)
+This graph shows a Receiver Operating Characteristic (ROC) curve, which is a common method for evaluating the performance of a binary classification model. The graph displays the ROC curve for a cat versus dog classification example. In this graph:
+- **X-axis** 
+  - represents the False Positive Rate
+  - the proportion of negative instances incorrectly predicted as positive<div style="color: grey; ">假阳性率，错误地将负类预测为正类的比例</div>
+- **Y-axis** 
+  - represents the True Positive Rate, also is "Recall"
+  - the proportion of positive instances correctly predicted as positive <div style="color: grey; ">真阳性率，正确地将正类预测为正类的比例</div>
+- **Performance Evaluation**（性能评估）
+  - The area under the ROC curve (Area Under the Curve, AUC) is an important metric for evaluating model performance. 
+  - The AUC value ranges from 0 to 1, with higher values indicating better model performance.<div style="color: grey; ">AUC的值介于0和1之间，值越大，模型的性能越好</div>
+  - In this example, the model's ROC curve is significantly above the baseline of random guessing, indicating good discriminative ability.<div style="color: grey; ">在这个例子中，模型的ROC曲线明显高于随机猜测的基线，表明模型具有较好的区分能力</div>
+- **Threshold Selection**（阈值选择）
+  - Different points on the ROC curve correspond to different classification thresholds. <div style="color: grey; ">ROC曲线上的不同点对应于不同的分类阈值</div>
+  - By adjusting the threshold, a trade-off can be made between FPR and TPR to find the optimal classification strategy <div style="color: grey; ">通过调整阈值，可以在FPR和TPR之间进行权衡，以找到最佳的分类策略</div>
+- **Black Line** 
+  - represents the model's performance
+  - represents the actual ROC curve of the classifier being evaluated. <div style="color: grey; ">代表了正在评估的分类器的实际ROC曲线</div>
+  - It plots the True Positive Rate (TPR) against the False Positive Rate (FPR) at various threshold settings. <div style="color: grey; ">绘制了在不同阈值设置下真正率（TPR）与假正率（FPR）之间的关系</div>
+  - The closer this curve follows the left-hand border and then the top border of the ROC space, the more accurate the classifier.<div style="color: grey; ">这条曲线越接近ROC空间的左边界和上边界，分类器的准确性就越高，即模型的分类性能越好</div>
+- **<div style="color: green; ">Green Dotted Line</div>**   
+  - represents a threshold that results in a TPR equal to the FPR. <div style="color: grey; ">某个特定阈值下真正率等于假正率的点</div>
+  - It's a line of no discrimination, meaning the classifier is performing no better than random guessing at this point. <div style="color: grey; ">这是一条无区分能力的线，意味着在这个点上分类器的性能不比随机猜测好。</div>
+  - In essence, it's where the classifier's predictions are as likely to be false positives as true positives.<div style="color: grey; ">本质上，这是分类器的预测假阳性和真阳性可能性相同的点。</div>
+- **<div style="color: red; ">Red Dashed Line</div>** 
+  - the diagonal line from the bottom left to the top right of the ROC space, representing a completely random classifier where the TPR is equal to the FPR at every point. <div style="color: grey; ">从ROC空间的左下角到右上角的对角线，代表一个完全随机的分类器，其中在每个点上TPR都等于FPR</div>
+  - A classifier with an ROC curve that lies below this line is considered to perform worse than random guessing. <div style="color: grey; ">如果一个分类器的ROC曲线位于这条线下方，则认为其性能比随机猜测还差</div>
+
+
+<mark>**Precision Recall (PR) Curves**</mark>
+![Precision Recall Curves](pic_ML/PR.png)
+
+曲线越靠近右上角（Precision=1，Recall=1），模型性能越好。(模型在保持高召回率的同时，也能维持较高的精确率)
+
+<mark>**Area Under the Curve (AUC)**</mark>
+- AUC refers to the area under the ROC curve or the PR curve. 
+- It represents the model's ability to correctly classify positive and negative samples.
+- An important metric for evaluating the performance of classification models
+- How to read AUC？
+  - The AUC value ranges from 0 to 1
+  - **1**: the model can perfectly distinguish between positive and negative samples
+  - **Closer to 1**: the better the model's classification performance
+  - **0.5**: indicates that the model's classification performance is equivalent to random guessing
+  - **Less than 0.5**: indicates that the model's classification performance is worse than random guessing
+  - For precision-recall curves, the AUC for a random classifier depends on the proportion of positive samples in the overall sample. This is because, under random guessing, the model's precision and recall will be related to the proportion of positive samples <div style="color: grey; ">对于精确率-召回率曲线，随机分类器的AUC值取决于正类样本在总体样本中的比例。这是因为在随机猜测的情况下，模型的精确率和召回率将与正类样本的比例相关</div>
+.
+
+#### **<u>Multiclass</u>**
+- Split into multiple binary problems
+- Take an average or weighted average of binary measures
+- ***One-vs-Rest*** also called ***One-vs-All***
+  - Decompose a multiclass problem into multiple binary problems
+  - Each class is calculated as 【**that class**】vs.【**not that class**】
+  - For example, with low, medium, and high classes:
+    - 【low】vs.【not low (medium and high)】
+    - 【medium】vs.【not medium (low and high)】
+    - 【high】vs.【not high (low and medium)】
+  - <mark>**For N classes, N binary problems**</mark>
+- ***One-vs-One***
+  - Split into each class vs each class ➡️ Decompose a multiclass problem into binary problems between each pair of classes
+  - For example, with low, medium, and high classes:
+    - 【low】vs.【medium】
+    - 【low】vs.【high】
+    - 【medium】vs.【high】
+  - <mark>**For N classes, \( \frac{N\times(N-1)}{2}\) binary problems**</mark>
+  - One-vs-One requires more calculations (than One-vs-Rest) because more binary models are created
+
+
+
+---
