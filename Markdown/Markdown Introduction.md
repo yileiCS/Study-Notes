@@ -4,6 +4,7 @@
 ## 1. Learning Materials:
 - [LinkedIn Learning - Learning Markdown](https://www.linkedin.com/learning/learning-markdown?u=69919578)
 - [Basic syntax](https://www.markdownguide.org/basic-syntax/)
+- [Github Formatting syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
 ---
 
@@ -49,6 +50,10 @@ Above is another paragraph.
 | Data 1   | Data 2   | Data 3   |
 | Data 4   | Data 5   | Data 6   |
 ```
+- Markdown table generator
+  [LaTeX Table Generator](https://www.tablesgenerator.com/)
+  
+  <img src='pic_markdown/LaTeX_Table_Generator.png' style="width: 100%; max-width: 50%" />
 
 ### (4). Font Style
 
@@ -160,12 +165,6 @@ Create blockquotes with the ```>``` symbol
   ```
 
 - Specify a programming language at the beginning of a code block to enable syntax highlighting:
-  ```python
-  def hello_world():
-    print("Hello, world!")
-  ```
-
-  ```
   ```python
   def hello_world():
     print("Hello, world!")
