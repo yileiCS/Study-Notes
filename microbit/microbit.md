@@ -74,10 +74,18 @@ Example: When connecting a sensor, you need to connect both the signal line (suc
 - Static electricity protection: Touch a metal object to discharge before operating in a dry environment.
 
 
+---
+## Input and Output Device on Microbit
+- **Input**
+  - Speaker
+  - LED
+- **Output**
+  - button
+  - sensor
 
 
 ---
-## Comparison with Arduino
+### Comparison with Arduino
 - **Microbit**:
   - Designed for education, simpler programming.
   - Integrated sensors and Bluetooth.
@@ -86,8 +94,7 @@ Example: When connecting a sensor, you need to connect both the signal line (suc
   - Requires external components for similar functionality.
 
 ---
-## Programming Languages
+### Programming Languages
 - **MicroPython**: Variant of Python optimized for Microbit.
 - **Blocks Editor**: Visual programming environment for beginners.
-
 
