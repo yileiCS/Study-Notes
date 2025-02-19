@@ -169,4 +169,55 @@ If two operators have the same precedence, the expression is evaluated from left
   #输出结果为banana
   ```
   
-  
+---
+### [REST APIs](https://realpython.com/api-integration-in-python/)
+- REST: Representational State Transfer 表述性状态转移
+  - an architectural style for designing networked applications, which is the construction of networked software systems
+- Restful Web Service
+  - uses REST APIs to communicate
+  - a service that adheres to the REST guidelines
+  - querying an online service via an API key
+#### [REST Architecture](https://realpython.com/api-integration-in-python/#rest-architecture)
+  - Offers a set of guidelines for building networked software systems
+  - In this architecture, a client makes requests via a web server
+  - Client and server are two separate entities where the client initiates requests and the server processes and responds to those requests
+  - Each request from client to server must contain all information needed to understand and process the request, and the server does not store any information about the client between requests
+  - The server can specify whether the response is cacheble, and the client can cache data to reduce network requests and improve efficiency
+  - Systems interact using uniform interface, which simplifies architectural design and allows each part to evolve independently
+  - Communication can occur between multiple layers, and the client cannot know whether it's communicating directly with the final server or with an intermediate layer
+  - Servers can send code to client on demand, and clients can execute this code to extend their functionality
+
+#### **<u>Request</u>** 
+- Operation
+- Endpoint
+- Parameters/Body
+- Headers
+- Users can request data by constructing specific URLs
+#### **<u>Response</u>** 
+
+#### **<u>HTTP Methods</u>** 
+| Method | Description                           |
+| ------ | ------------------------------------- |
+| GET    | Retrieve an existing resource         |
+| POST   | Create a new resource                 |
+| PUT    | Update an existing resource           |
+| PATCH  | Partially update an existing resource |
+| DELETE | Delete a resource                     |
+
+==**POST/api/todo**==:前端产生数据 ➡️ 数据从前段发送到服务端 ➡️ 服务端收到数据并保存
+==**GET/api/todo**==:服务端查询数据并返回 ➡️ 数据从服务端返回给前端 ➡️ 前端数据展示
+==**PUT/api/todo/:id**==:前端更新:id数据 ➡️ 数据从前端发送到服务端 ➡️ 服务端修改:id数据并保存
+==**DELETE/api/todo/:id**==:前端希望删除:id数据 ➡️ 请求从前端发送到服务顿 ➡️ 服务端删除:id的数据
+
+API front-end code example
+  ```
+  <form action="/api/todo" method="POST">
+    <input name="text" /><button>Yes</button>
+  </form>
+  ```
+
+#### **<u>Endpoints</u>** 
+- Endpoint is a specific URL, where an API can be accessed by a client
+- It represents a specific function or resource available in the API
+  - It points to a particular operation or data resource provided by the API
+- An endpoint is a specific access point in an API used to retrieve or manipulate specific data or functionality
