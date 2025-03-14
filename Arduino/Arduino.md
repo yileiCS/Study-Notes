@@ -47,7 +47,7 @@
 TX 和 RX 引脚：
 - Arduino Uno 的 TX（发送） 和 RX（接收） 引脚用于串行通信。
 - 通常情况下，Arduino 的 TX 引脚应该连接到外部设备的 RX 引脚，Arduino 的 RX 引脚应该连接到外部设备的 TX 引脚。这是因为发送端（TX）需要与接收端（RX）相连，以实现双向通信。
-
+有～的引脚，可以使用它们输出pulse width modulated square waves（脉宽调制方波）
 ---
 # Basic Operation
 - The program that is loaded to the microcontroller will start execution as soon as it's powered
@@ -291,8 +291,33 @@ Example: LED turns on when push the button
 
 
 
-
-
+---
+## LCD
+通常使用的是1602或2004型的LCD显示屏，通常有16个或20个字符的行数，分别是2行或4行
+**LCD引脚定义**
+－ VSS: 为LCD的地线，要连接到Arduiono的GND接地
+－ VDD: 供电引脚，要连接到Arduiono的+5V电源
+－ V0: 对比度调节，可以通过调节电位器来使显示的内容清晰可见，连接到电位器中间引脚，电位器其他两引脚分别连接到+5V和GND
+－ RS: 寄存器选择，用于选择数据或命令（高电平表示数据，低电平表示命令）。连接到Arduino的数字引脚，例如引脚12。
+－ RW: 读／写选择引脚，通常接地（低电平），表示只进行写操作
+－ E: 使能引脚，连接到Arduino的数字引脚，例如引脚11
+－ D0-D7: 数据引脚，用于传输数据。可以选择使用所有8个引脚或仅适用高4位（D4-D7）
+－ A: 背光正极，连接到+5V
+－ K: 背负负极，接地
+**`LiquidCrystal`库**
+－ 控制LCD
+  ```
+  #include <LiquidCrystal.h>
+  LiquidCrystal lcd(12,11,5,4,3,2);
+  void setup() {
+    lcd.begin(16,2);
+    lcd.print(“Hello World!”);
+  }
+  
+  void loop() {
+    //运行代码
+  }
+  ```
 
 
 ---
