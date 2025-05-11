@@ -6,10 +6,10 @@
 - Data can be either numerical or categorical.
 - Numerical data can be expressed as interval or ratio.
 - Categorical data can be nominal or ordinal.
-- Nominal scale: only compare if data is equal or not equal, cannot order, add, subtract, multiply, or divide.
-- Ordinal scale: can order values, but cannot add, subtract, multiply, or divide.
-- Interval scale: can compare, order, add, or subtract values, but lacks a true zero point.
-- Ratio scale: has a true zero point, supports all mathematical operations.
+- **Nominal scale**: only compare if data is equal or not equal, cannot order, add, subtract, multiply, or divide.
+- **Ordinal scale**: can order values, but cannot add, subtract, multiply, or divide.
+- **Interval scale**: can compare, order, add, or subtract values, but lacks a true zero point.
+- **Ratio scale**: has a true zero point, supports all mathematical operations.
 - Prediction models cannot process categorical data; they need numbers.
 - Need to convert categorical data into numerical data for predictive analytics.
 
@@ -29,15 +29,18 @@
 - Drop column: `data.drop('Bmi', axis=1, inplace=True)`.
 - Drop rows: `data.dropna(inplace=True)`.
 - Fill missing values with mean using `SimpleImputer(strategy='mean')`.
-- Visualizations: distribution of charges is right skewed; imbalance in smokers vs non-smokers; age has strongest correlation with charges.
 
 ### 1.4 Convert categorical data into numbers
 - Prediction models only accept numerical data.
 - Two ways: label encoding (for two distinct values), one hot encoding (for three or more).
-- Label encoding example: replace yes/no with 1/0.
-- One hot encoding: add new columns for each category, use 1/0 for presence.
-- Use `LabelEncoder` and `OneHotEncoder` from sklearn.
-- Pandas alternatives: `factorize`, `get_dummies`.
+- **Label encoding**
+  - example: replace yes/no with 1/0
+  - Use `LabelEncoder` from sklearn
+  - Use `factorize` from Pandas
+- **One hot encoding** 
+  - example: add new columns for each category, use 1/0 for presence
+  - Use `OneHotEncoder` from sklearn.
+  - Use `get_dummies` from Pandas
 - Use label encoding for binary features, one hot encoding for multi-class features.
 
 ### 1.5 Divide the data into test and train
@@ -52,8 +55,14 @@
 ### 1.6 Feature scaling
 - Apply feature scaling to prevent features with larger magnitudes from dominating the model.
 - Two common methods: normalization (MinMax scaling) and standardization.
-- Normalization: rescales data to range 0-1 using MinMaxScaler.
-- Standardization: subtract mean and divide by standard deviation using StandardScaler.
+- **Normalization**
+  - using `MinMaxScaler` from sklearn, scale to target range via `feature_range`.
+  - default range: [0,1]  
+  - you can specify different range, e.g., [0, 10]
+    - example: scaler = MinMaxScaler(feature_range=(0, 10))
+- **Standardization**
+  - using `StandardScaler` from sklearn
+  - transform the data to have a mean of 0 and a standard deviation of 1
 - Scaling is commonly applied to X, not Y.
 - Feature scaling ensures all variables are treated equally in the model.
 
