@@ -203,7 +203,8 @@ How do we know how the model will perform on new data if we can’t test on the 
 Reply on **validation techniques** during development, here's how it works:
 - **Cross-Validation** (e.g., k-fold):
   - Split the training data into ***k*** subsets. Train the model ***k*** times, each time using ***k*** subsets for training and ***1*** subset for validation.
-  -  This provides an average performance metric (e.g., accuracy, F1-score) that estimates how the model generalizes to unseen data.
+  - This provides an average performance metric (e.g., accuracy, F1-score) that estimates how the model generalizes to unseen data.
+  - 交叉验证是一种评估模型性能的方法。它将数据集分成多个子集（称为“折”），并在不同的子集上训练和测试模型，以确保结果的稳定性和可靠性。
 - **Hold-Out Validation Set**
   - Divide the data into **training**, **validation**, and **test** sets
   - Use the validation set to **tune hyperparameters** and **monitor performance** during training
@@ -211,7 +212,8 @@ Reply on **validation techniques** during development, here's how it works:
 - Why Avoid the Test Set Early?
   - The test set acts as a "final exam" to evaluate the model’s **true generalization** (真实泛化能力)
   - Using it prematurely (e.g., for hyperparameter tuning) risks overfitting to the test data, inflating performance estimates (可能会过度拟合测试数据，从而夸大性能估计)
-
+- Parameter Grid 参数网格
+  - 参数网格是一个字典，其中键是模型的参数名，值是一个包含可能参数值的列表。它定义了你想要尝试的所有参数组合。
 ---
 #### **<u>Validation data</u>** 验证数据
 - Need a measure of how model will perform on unseen data before we use the test data
@@ -360,6 +362,7 @@ $$
 - Fine-tune model
   - Objective: Optimize the model's performance by adjusting hyperparameters
   - Activities: Use techniques like grid search or random search to find the best hyperparameters, and validate the model's performance using the validation set
+    - GridSearchCV：是scikit-learn 中的一个工具，用于自动寻找最佳参数组合。它通过遍历参数网格中的所有可能组合，找到性能最佳的参数配置。
 - Present your solution
   - Objective: Communicate the model's performance and insights to stakeholders
   - Activities: Prepare a presentation or report that explains the model's performance, key insights, and business implication
@@ -536,14 +539,14 @@ Present the solution
   - Residual sum of squares (RSS)
   - Sum of square errors (SSE)
 - Sum of absolute values \(\sum_{i=1}^{n} \left|y_{i} - \hat{y}_{i} \right|\)
-- 
+ 
 - <mark>**MSE</mark> = <mark>\( \frac{1}{n} \sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^{2} \)**</mark>  ➡️ Mean Squared Error 均方误差
   - 作用：用于<mark>衡量模型的预测精度，值越小说明模型预测越准确<mark>
 - <mark>**RMSE</mark> = <mark>\( \sqrt{\frac{1}{n} \sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^{2}} \)**</mark>  ➡️  
     - Root Mean Square Error (RMSE), 均方根误差, 是回归模型评估的核心指标之一
 - MSE 和 RMSE 都涉及误差的平方，因此对异常值（即远离平均值的点）非常敏感。异常值会导致误差平方增大，从而显著影响 MSE 和 RMSE 的值
 - RMSE 是通过取 MSE 的平方根，将误差值转换到与原始数据相同的量纲上，从而便于理解和比较误差的大小
-- 
+ 
 - <mark>**Euclidean norm, \( L_2 \) norm, \( ||\cdot||_2 \)**</mark>
   - \( L_2 \) 范数：数学上对欧几里得范数的另一种称呼，定义为向量各元素平方和的平方根
   - Euclidean norm (欧几里得范数) ➡️ The Euclidean norm is the square root of the sum of the squares of the vector elements, used to measure the length or magnitude of a vector <div style="color: grey;">向量空间中向量长度的计算公式 （如向量的几何距离</div>
@@ -551,24 +554,40 @@ Present the solution
     - 用于<mark>正则化（如岭回归），防止模型过拟合</mark>
     - <mark>RMSE本质上利用了\( L_2 \) 范数计算误差</mark>
 - Outliers have more influence
-- 
+ 
 - <mark>**MAE</mark> = <mark>\(\frac{1}{n}\sum_{i=1}^{n} \left|y_{i} - \hat{y}_{i} \right|\)**</mark>
 - MAE: Mean Absolute Error  (平均绝对误差)
 - MAE 是预测误差的绝对值的平均值，能够反映预测值与实际值之间的平均绝对差
-- 
+ 
 - <mark>**Manhattan norm, \( L_1 \) norm, \( ||\cdot||_1 \)**</mark>
 - The Manhattan norm is the sum of the absolute values of the vector elements, used to measure the length or magnitude of a vector <div style="color: grey;">曼哈顿范数是向量元素绝对值的和，用于衡量向量的长度或大小</div>
 - In error metric, the Manhattan norm corresponds to MAE <div style="color: grey;">在误差度量中，曼哈顿范数对应于 MAE
 - Since MAE involves only the absolute values or errors, not their squares, it is less sensitive to outliers. Outliers do not significantly increase the value of MAE because MAE does not amplify errors <div style="color: grey;">由于 MAE 只涉及误差的绝对值，而不是平方值，因此对异常值的敏感度较低。异常值不会显著增加 MAE 的值，因为 MAE 不会放大误差
-- 
-- <mark>**\( R^2 \)**</mark> ：R squared (多重决定系数)
+
+- <mark>**SSE (Sum of Squares due to Error)**</mark> 残差平方和
+  - \[ SSE = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \]
+  - 观测值与模型预测值之间差异的平方和
+- <mark>**SSR (Sum of Squares due to Regression)**</mark> 回归平方和
+  - \[ SSR = \sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2 \]
+  - 预测值与观测值平均值之间差异的平方和
+- <mark>**SST (Total Sum of Squares)**</mark> 总平方和
+  - \[ SST = \sum_{i=1}^{n} (y_i - \bar{y})^2 \]
+  - \[ SST = SSR + SSE \]
+  - 观测值与观测值平均值之间差异的平方和
+- <mark>**\( R^2 \)**</mark> ：R squared (决定系数)
+  - 是回归平方和与总平方和的比率，表示模型解释的变异量占总变异量的比例
+  - \[ R^2 = \frac{SSR}{SST} \]
   - \( R^2 = 1 - \frac{SSE}{SST} = 1 - \frac{\sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^2}{\sum_{i=1}^{n} \left(y_{i} - \bar{y} \right)^2} \)
   - Sum of squares total (SST), \( \sum_{i=1}^{n} \left(y_{i} - \bar{y} \right)^2 \)
-  - SSE: 误差平方和； SST: 总平方和
-  - \( y \) bar, \( \bar{y} \), mean of real values  ➡️  \( \bar{y} \)是所有实际值的平均值，用于计算 SST
+  - SSE: 残差平方和； SST: 总平方和
+  - \( y_i \) 是第i个观测值。
+  - \( \hat{y}_i \) 是第i个预测值。
+  - \( \bar{y} \) 是观测值的平均值。
+  - \( n \) 是观测值的数量。
   - Coefficient of multiple determination
   - \( R^2 \) 用于评估回归模型的拟合优度
-  - \( R^2 \) 是一个介于 0 和 1 之间的值，表示模型解释的变异量占总变异量的比例。值越接近 1，表示模型拟合得越好
+  - \( R^2 \) 是一个介于 0 和 1 之间的值，表示模型解释的变异量占总变异量的比例。值越接近 1，表示模型拟合得越好，即模型能够更好地解释因变量的方差
+  - \( R^2 \) 局限性，例：不能区分模型的预测值与实际观测值之间的线性关系和非线性关系
 
 
 ---
@@ -715,4 +734,73 @@ This graph shows a Receiver Operating Characteristic (ROC) curve, which is a com
 
 
 
+
+
+
 ---
+### PREPROCESSING
+#### Empty Cells
+- Returen a new Data Frame with no empty cells
+  - `df.dropna()`
+  ```
+  df = pd.read_csv('data.csv')
+  new_df = df.dropna()
+  print(new_df.to_string())
+  ```
+
+
+
+
+
+
+
+
+---
+### LINEAR REGRESSION AND MODEL TRAINING
+`lr.fit`：scikit-learn 库中Linear Regression的一个方法，用于训练模型，使其能够根据输入数据预测输出
+- 作用：找到最佳的模型参数，使得模型能够最好地拟合训练数据
+  - e.g.在线性回归中，模型的参数是直线的斜率（slope）和截距（intercept），lr.fit 的任务就是找到这些参数的最佳值
+- 拟合过程：模型会尝试调整这些参数，使得预测值和实际值之间的误差最小
+  - 这个误差通常用“损失函数”（Loss Function）来衡量，比如均方误差（Mean Squared Error, MSE）
+- 最佳拟合
+  -  lr.fit 使用优化算法（如梯度下降）来找到使损失函数最小的参数组合
+  -  这个过程可以想象成在参数空间中寻找最低点
+#### StandardScaler
+- StandardScaler 是 scikit-learn 库中的一个类，用于标准化数据
+- 主要作用：将数据的每个特征（列）转换为均值为 0、标准差为 1 的分布
+- 标准化的目的
+  - 统一尺度
+    - 不同特征的数值范围可能差异很大（例如，房屋面积可能在 10 到 1000 之间，而价格可能在 100000 到 1000000 之间）。标准化可以消除这种尺度差异，使所有特征在相同的尺度上。
+  - 提高模型性能
+    - 许多机器学习算法（如线性回归、支持向量机等）对特征的尺度敏感。标准化可以提高这些算法的收敛速度和性能。
+- 标准化的目的：消除特征之间的尺度差异，提高模型性能。
+- 标准化的影响：可能会改变模型中不同系数的重要性。
+- **Z分数**：一种标准化方法，它将数据转换成一个均值为0、标准差为1的分布
+  - <mark>**\( Z = \frac{X - \mu}{\sigma} \)**<mark> 
+- 标准化的过程
+  - 计算每个特征的均值和标准差
+  - 将每个数据点的特征值减去均值，除以标准差，即得到标准化后的数据
+  - 标准化后的数据的均值为 0，标准差为 1
+  - 这样所有特征就处于相同的尺度上，方便模型训练和比较，提高模型性能
+- 为什么需要标准化？（通俗理解）
+  - 假设你有两个朋友，一个叫小明，一个叫小红。小明的数学考试满分是100分，他考了90分；小红的语文考试满分是200分，她考了180分。现在你想知道谁考得更好。直接比较原始分数的话，小红的180分看起来比小明的90分高很多。但实际上，小明的90分是满分的90%，而小红的180分是满分的90%。他们的表现其实是相同的。标准化就是把不同尺度的数据（比如不同满分的考试成绩）转换成一个统一的尺度（比如百分比），这样比较起来就公平了。
+- 为什么标准化可以提高算法的收敛速度和性能？
+  - 想象你在爬山，想找到山顶。如果你的步子大小不一（特征尺度不同），你可能会在某些方向上迈得太大，在另一些方向上迈得太小，导致你绕了很多弯路才找到山顶。而如果你的步子大小一致（特征尺度统一），你就能更直接地找到山顶。在机器学习中，标准化就像是让所有特征的“步子”大小一致，这样模型在学习时可以更快地找到最佳解，减少迭代次数，提高效率。   
+
+#### XGBoost
+- XGBoost：是一种基于梯度提升的机器学习算法，它通过构建多个决策树来提高预测的准确性和性能。
+- XGBRegressor：XGBRegressor 是 XGBoost 库中专门用于回归问题的类。
+- 通过构建多个决策树逐步修正预测错误，预测性能强大，但解释性较差。
+- 可以处理缺失值和非数值列，无需标准化。
+- XGBRegressor 的主要参数
+  - n_estimators：决策树的数量。默认值为 100(通常从100开始，逐步增加)。➡️ 增加树的数量通常可以提高模型的性能，但过多的树可能会导致过拟合。
+  - learning_rate：学习率，控制每棵树对最终结果的贡献程度。默认值为 0.1(通常从0.01开始，逐步增大)。➡️ 较小的学习率可以使模型更稳定，但可能需要更多的树来收敛。
+  - max_depth：每棵树的最大深度。默认值为 3(通常从3开始，逐步增加)。➡️ 较大的深度可以使模型更复杂，但也可能导致过拟合。
+  - subsample：用于训练每棵树的样本比例。默认值通常从0.7开始，逐步增大。➡️ 减少样本比例可以防止过拟合。
+  - colsample_bytree：用于训练每棵树的特征比例。默认值通常从0.7开始，逐步增大。➡️ 减少特征比例可以防止过拟合。
+  - random_state：随机种子，用于确保结果的可重复性。
+- XGBRegressor 的优势
+  - 高准确性：通过构建多个决策树，逐步修正预测错误，提高模型的准确性。
+  - 高效性：XGBoost 使用高效的算法和数据结构，能够快速处理大规模数据。
+  - 灵活性：支持多种参数调整，可以根据具体问题进行优化。
+  - 鲁棒性：对缺失值和异常值具有较好的鲁棒性。
