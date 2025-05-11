@@ -2,7 +2,7 @@
 
 ---
 ## 🩵 Welcome to my personal study notes repository! 
-This repository serves as a collection of my personal records and knowledge-sharing efforts. It covers various topics, including but not limited to:
+This repository serves for personal study records and knowledge-sharing. It covers various topics, including but not limited to:
 - Data science
 - Machine learning
 - Programming languages
