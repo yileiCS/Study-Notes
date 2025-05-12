@@ -149,7 +149,6 @@
   - <div style="color: grey;">机器学习算法能处理/分析大量数据，从中提取有用的信息/洞察。这对于理解复杂现象、发现隐藏的关联和趋势非常有用。</div>
 
 ---
-
 ## Challenges for ML
 ### What affects the performance of a machine learning algorithm?
 | **Reason**              | **Specific**                                                                                                                                                    |
@@ -160,28 +159,8 @@
 | Data quality            | - bad quality data </br> - missing data                                                                                                                         |
 | Bad algorithms          | - over fitting </br> - under fitting                                                                                                                            |
 
-### **<u>Correct Features</u>**
-- **Feature Selection 特征选择**
-  - Features must be relevant
-    - 相关性高的特征通常能更好地帮助模型进行预测
-  - Must have enough features
-    - 确保选择的特征数量足够，以覆盖数据的多样性和复杂性
-    - 特征过少可能导致模型**欠拟合** (Under-fitting)，无法捕捉数据中的重要模式
-  - Not too many irrelevant features
-    - 不相关的特征无助于模型预测，还可能增加模型复杂度，导致**过拟合** (Over-fitting)
-- **Feature Engineering 特征工程** 
-  ➡️ 通过创建新的特征或对现有特征进行转换来提高模型性能的过程
-  - Create new features
-    - 根据现在数据生成新特征，这些新特征可能更好地捕捉数据中的模式。
-  - Combine, split or transform
-    - Combine (组合): 将多个特征组合成一个新特征。e.g.将两个数值特征相加或相乘
-    - Split (分割): 将一个特征分割成多个特征。e.g.将一个包含多个信息的字符串特征分割成多个数值特征
-    - Transform: 对特征进行数学转换。e.g.对数值特征取对数、平方等，以减少特征的偏态或非线性关系
-  
-- 通过特征选择和特征工程，可以提高模型的预测性能，减少过拟合和欠拟合的风险，并使模型更加简洁和易于解释。
-
 ---
-### What can machine learning use for?
+## What can machine learning use for?
 - Forecasting future revenue based on performance metrics: 基于绩效指标预测未来收入
 - Calculating online insurance quotes: 计算在线保险报价
 - Detecting fraudulent bank transactions: 检测欺诈性银行交易
@@ -189,182 +168,6 @@
 - Detecting tumours in medical scans: 在医学扫描中检测肿瘤
 - Spam filters: 垃圾邮件过滤器
 - Recommendation algorithms: 推荐算法
-
----
-### **<u>Test Data</u>**
-- Must test on unseen data before deploying algorithm
-- Split data into **training** (often 70-80% ) and **test** (often 20-30% ) sets
-- Don't touch test set until final algorithm created
-  - <div style="color: grey; ">This helps prevent overfitting and ensures that the test set provides an unbiased evaluation of the model's performance</div>
-- Use just once to measure performance of final algorithm
-  - Repeated use of the test set for tuning or validation can lead to overfitting and an inaccurate assessment of the model's **generalization ability**
-
-How do we know how the model will perform on new data if we can’t test on the test data?
-Reply on **validation techniques** during development, here's how it works:
-- **Cross-Validation** (e.g., k-fold):
-  - Split the training data into ***k*** subsets. Train the model ***k*** times, each time using ***k*** subsets for training and ***1*** subset for validation.
-  - This provides an average performance metric (e.g., accuracy, F1-score) that estimates how the model generalizes to unseen data.
-  - 交叉验证是一种评估模型性能的方法。它将数据集分成多个子集（称为“折”），并在不同的子集上训练和测试模型，以确保结果的稳定性和可靠性。
-- **Hold-Out Validation Set**
-  - Divide the data into **training**, **validation**, and **test** sets
-  - Use the validation set to **tune hyperparameters** and **monitor performance** during training
-  - This mimics testing on unseen data without touching the final test set. (模拟了在不接触最终测试集的情况下对看不见的数据进行测试)
-- Why Avoid the Test Set Early?
-  - The test set acts as a "final exam" to evaluate the model’s **true generalization** (真实泛化能力)
-  - Using it prematurely (e.g., for hyperparameter tuning) risks overfitting to the test data, inflating performance estimates (可能会过度拟合测试数据，从而夸大性能估计)
-- Parameter Grid 参数网格
-  - 参数网格是一个字典，其中键是模型的参数名，值是一个包含可能参数值的列表。它定义了你想要尝试的所有参数组合。
----
-#### **<u>Validation data</u>** 验证数据
-- Need a measure of how model will perform on unseen data before we use the test data
-  - <div style="color: grey">验证集用于调整模型的参数和评估模型的性能
-  - <div style="color: grey">测试集用于最终评估模型的泛化能力
-- Split data again
-  - Corss-validation or validation set 交叉验证或验证集
-    - <div style="color: grey">将训练集分成多个小的子集，每次用一个子集作为验证集，其余子集作为训练集
-    - <div style="color: grey">通过多次重复该过程以更全面地评估模型的性能
-    - <div style="color: grey">从训练集中划分出一部分数据作为验证集，用于调整模型的超参数和评估模型的性能
-- Use multiple times to tune algorithm 调整算法
-  - The algorithm starts to learn this data too
-
-Key Takeaway:
-Validation techniques (cross-validation, hold-out validation) **provide reliable estimates** of model performance on new data, ensuring the test set remains pristine for unbiased evaluation. <div style="color: grey; ">验证技术（交叉验证、保持验证）提供了对新数据模型性能的可靠估计，确保测试集保持原始状态，以便进行无偏评估</div>
-
-**There are 3 properties necessary for a good training and validation strategy:**
-- Train the model on a large proportion of the dataset. Otherwise we’ll fail to read and recognise underlying trends in the data, resulting in underfitting. 在很大一部分数据集上训练模型。否则，我们将无法读取和识别数据中的潜在趋势，从而导致拟合不足。
-- Need a good number of validation data points or we might fail to detect overfitting. 需要大量的验证数据点，否则我们可能无法检测到过拟合。
-- Iterate on the training and validation process multiple times, using various training and validation dataset distributions, to be confident in validating model effectiveness properly. 使用各种训练和验证数据集分布多次迭代训练和验证过程，以确保正确验证模型的有效性。
-
-**K-fold cross validation is a method that addresses all three**
-  - Choosing K is a tradeoff; 5 and 10 are commonly used. 选择K是一种权衡；5和10是常用的
-  - Disadvantage: the increased computational cost (计算成本较高，因为需进行K次训练和验证，特别是在数据集大或模型复杂的情况下)
-
-#### **<u>K-fold cross-validation</u>  K折交叉验证** 
-- It helps ensure that the model generalizes well to unseen data by using different portions of the dataset for training and testing in multiple iterations. 
-- Randomly split your entire dataset into ***K*** ”folds” 将整个数据集随机拆分为K个“折叠”
-- For each fold in your dataset, build your model on ***K–1*** folds of the dataset 对于数据集中的每个折叠，在数据集的K-1个折叠上构建模型
-- Then, test the model to check the effectiveness for ***Kth*** fold 测试模型以检查第K次折叠的有效性
-- Record the error you see on each of the predictions 记录您在每个预测中看到的错误
-- Repeat this until each of the folds has served as the test set 重复此操作，直到每个fold都作为测试集
-- The ***average of K recorded errors*** is called the ***cross-validation error*** and will serve as your **performance metric** for the model K个记录错误的平均值称为交叉验证错误，将作为模型的性能指标
-  
-【K-Fold Cross-Validation vs. Train-Test Split】
-- Train-Test Split (Image by Vinod Chugani)
-  - ![Train-Test Split (Image by Vinod Chugani)](pic_ML/test_split_illustration.png)
-- K-Fold Cross-Validation (Image by Vinod Chugani)
-  - ![K-Fold Cross-Validation (Image by Vinod Chugani)](pic_ML/5-Fold_Cross-Validation.png)
-
-[A Comprehensive Guide to K-Fold Cross Validation](https://www.datacamp.com/tutorial/k-fold-cross-validation)
-
-
-None of the models produced in cross validation are the final model.
-- <div style="color: grey">交叉验证中的模型不是最终模型，因为它们只基于部分数据训练，无法充分利用所有信息
-Use the best hyper-parameters from CV
-- <div style="color: grey">通过交叉验证，我们可以选择最佳的超参数，比如正则化强度或树的深度。这些超参数是在多个数据子集上表现一致的组合
-- retrain on the whole training set to get your final model <div style="color: grey">确定最佳超参数后，使用这些参数在完整训练集上重新训练模型，以获得最终模型
-
-
-### **<u>Fine tuning models</u> 模型微调** 
-Fine-tuning involves the process of adjusting the hyperparameters of a model to improve its performance.
-- **Parameters** are learnt by the model <div style="color: grey">参数是模型在训练过程中学习到的变量。这些是模型的内部变量，通过调整来最小化损失函数
-- Hyper Parameters are set by user <div style="color: grey">超参数是用户在训练过程开始之前设置的变量。这些是控制学习过程和模型结构的外部变量</div>
-  - hyperparameters are not learned from the data
-  - hyperparameters are the setting that are manually specified before the training process begins
-  - hyperparameters control the learning process and the structure of the model
-  - examples of hyperparameters: gradient descent, the number of layers in a neural network, or the max depth of a decision tree.
-- Fine-tune algorithms by finding a good set of hyper-parameters
-- 模型微调方法
-  - 网格搜索: 系统地尝试指定范围内的所有可能的超参数组合。虽然计算成本高，但可以确保找到最佳组合。
-  - 随机搜索: 从指定分布中随机采样超参数组合。计算成本较低，通常比网格搜索更高效地找到好的超参数
-  - 贝叶斯优化: 使用概率模型来指导搜索最优超参数。在高维超参数空间中比网格和随机搜索更高效
-  - 交叉验证: 通常与超参数调优结合使用，以确保模型性能在不同数据子集上公平且一致地评估。
-- 模型微调步骤
-  - 定义超参数空间: 确定要调优的超参数，并为每个超参数指定值的范围
-  - 选择调优方法: 选择搜索超参数空间的方法（例如，网格搜索、随机搜索、贝叶斯优化）
-  - 评估模型性能: 使用交叉验证评估每组超参数的模型性能。
-  - 选择最佳超参数: 选择在验证集上表现最佳的超参数。
-  - 重新训练模型: 使用最佳超参数在完整训练集上重新训练模型，以获得最终模型。
-
-#### **[Grid Search](https://scikit-learn.org/stable/modules/grid_search.html)**
-- operates by constructing a grid of hyperparameter values and evaluating the model performance for each point on the grid
-- **exhaustively/systematically** tests all possible combinations of hyperparameters to find the best model configuration
-- key features:
-  - finds **optimal hyperparameters** of a model which results in the most '**accurate**' predictions
-  - fully automated and exhaustive search over specified parameter values
-  - can be parallelized across multiple computational resources
-  - easy to use and interpret
-- Benefits and Use cases
-  - Effectiveness: **Ideal for smaller data sets and fewer parameters**
-  - Automation: **Minimized manual intervention** in tuning the model
-  - Configurability: Allows control over the desired combinations of hyperparameters
-- Challenges and Limitations
-  - computationally expensive: high time resource consumption with increasing dimensions
-  - inefficiency with high-dimensional data: it suffers from the "curse of dimensionality"
-  - less suitable for larger, high-dimensional data sets
-
-#### **Random Search**
-- an approach to parameter tuning that will **sample algorithm configurations from a random distribution** (i.e. uniform) for a **fixed number of iterations**
-
-#### **Bayesian Optimization**
-- a **sequential** design strategy for **global optimization of black-functions** that works by **building a probability model of the objective function** and using it to select the **most promising** hyperparameters to evaluate
-
----
-### **Notation**
-- We use upper case bold letters for matrices, \(\mathbf{A}, \mathbf{B}, \mathbf{C}, \mathbf{X}, \ldots\)
-- Matrix elements: corresponding lowercase with two indices \(a_{mq}, b_{rs}, c_{tu}, x_{ij}, \ldots\)
-- for the “data matrix” or the “feature matrix” \(\mathbf{X}\)
-  - \(x_{ij}\) is the element in row \(i\) and column \(j\) of the matrix \(\mathbf{X}\)
-- Columns contain features / variables
-  - <img src="pic_ML/features.png" style="width: 40%; max-width: 50%" />
-- Rows contain observations
-  - X = 
-$$
-\begin{pmatrix}
-X_{11} & X_{12} & \cdots & X_{1p} \\
-X_{21} & X_{22} & \cdots & X_{2p} \\
-\vdots & \vdots & \ddots & \vdots \\
-X_{n1} & X_{n2} & \cdots & X_{np}
-\end{pmatrix}
-$$
-
-
-**矩阵**
-- 定义: 矩阵用大写加粗字母表示，例如 A,B,C,X,…。
-- 用途: 这些符号用于在数学表达式和方程中表示矩阵。矩阵是线性代数中的基本数据结构，在数据挖掘和机器学习中广泛用于表示数据、特征和变换。
-
-**矩阵元素**
-- 定义: 矩阵的元素用相应的小写字母加上两个下标表示，例如 a<sub>mq</sub>, b<sub>rs</sub>, c<sub>tu</sub>, x<sub>ij</sub> ,…
-- 用途: 这些下标表示元素在矩阵中的位置。例如，a<sub>mq</sub> 表示矩阵 A 中第 m 行第 q 列的元素。这种表示法在进行矩阵运算或访问特定数据点时非常重要。
-
-**数据矩阵或特征矩阵**
-- 定义: 矩阵 X 通常用于表示数据矩阵或特征矩阵。
-- 用途: 在数据挖掘和机器学习中，数据矩阵 X 通常包含数据点的特征值。矩阵 X 的每一行表示一个数据点，每一列表示一个特征。例如，x<sub>ij</sub> 是矩阵 X 中第 i 行第 j 列的元素，表示第 i 个数据点的第 j 个特征值。
-
-- We use lower case bold letters for vectors, ***y***, ***x***
-- A vector is a matrix with only
-  - one row (a row vector) or,
-  - one column (a column vector)
-- If not specified, a vector will be a column vector
-- Use italic letters for scalar values(标量值), ***i***, ***y***, ***p***
-- Transpose operator(转置算子): superscript ***T***（上标T）
-  - <img src="pic_ML/transpose_operator.png" style="width: 40%; max-width: 50%" />
-
-### **Supervised Learning Notation**
-***y*** = ***f*** (***X***,***θ***) + ***ϵ***
-***y***: outcome; response; label; dimensions ***n × 1***
-***f***: a function
-***X***: data or feature matrix, dimensions ***n × p***
-***θ***: a set of “parameters”
-***ϵ***: a vector of “errors” or “noise” dimensions ***n × 1***
-
-### Inputs to training are:
-- ***X*** (a feature matrix) and,
-- ***y*** the values we want to predict
-
-### During learning:
-- try to find a function ***f*** and parameters ***θ***
-- that give results close to ***y*** when applied to ***X*** 
-- <img src="pic_ML/observation.png" style="width: 60%; max-width: 60%" />
 
 ---
 ### **ML Project Structure** 
@@ -540,7 +343,7 @@ $$
   - Final Evaluation
     - After fine-tuning the model and possibly using ensemble methods, the final model is evaluated on the test dataset to get an estimate of its performance on unseen data
 
-Present the solution
+#### **Present the solution**
 - Remember big picture from step 1
 - How the model meets business objective
 - Describe interesting findings along the way
@@ -549,8 +352,10 @@ Present the solution
   - Briefly describe what solutions were rejected and why.
 - Present clear statements and/or visuals of key findings
 
-### **Fine Tune the System** 
-#### **<u>Regression</u>**
+
+---
+---
+### **<u>Regression</u>**
 - Regression is predicting a number.
 - We could calculate the sum of the differences between the real and predicted values
   - Real value \( y_i \) (实际值)
@@ -611,7 +416,6 @@ Present the solution
   - \( R^2 \) 是一个介于 0 和 1 之间的值，表示模型解释的变异量占总变异量的比例。值越接近 1，表示模型拟合得越好，即模型能够更好地解释因变量的方差
   - \( R^2 \) 局限性，例：不能区分模型的预测值与实际观测值之间的线性关系和非线性关系
 
-
 ---
 ### **Classification**
 - Classification can either be
@@ -621,20 +425,22 @@ Present the solution
   - Some are either binary only or multiclass only
 - First we look at methods that can be used for either
 
-#### **<u>Confusion Matrix</u>**
-- Can be any number of classes
-- Do not need to be ordered (low, med, high)
-
-##### Accuracy
-- The percentage of correct answers
-- <mark>**Accuracy = \( \frac{correct}{total} \)**</mark>
-  
-#### **<u>Binary Classification</u>**
+#### **B<u>inary Classification<u>**
 - Only two categories
 - Predict positive, actual class positive, true positive, \(TP\)
 - Predict positive, actual class negative, false positive, \(FP\), type I errors
 - Predict negative, actual class negative, true negative, \(TN\)
 - Predict negative, actual class positive, false negative, \(FN\), type II errors
+
+---
+### **<u>Confusion Matrix</u>**
+- Can be any number of classes
+- Do not need to be ordered (low, med, high)
+
+---
+### Accuracy
+- The percentage of correct answers
+- <mark>**Accuracy = \( \frac{correct}{total} \)**</mark>
 
 <mark>**Accuracy = \( \frac{TP+TN}{TP+FP+FN+TN} \)**</mark>
 
@@ -672,7 +478,7 @@ Present the solution
 - Needs high precision and recall
   
   
-The output types of a binary classifier
+**The output types of a binary classifier**
 - Predictions
 - Scores
 
@@ -754,27 +560,101 @@ This graph shows a Receiver Operating Characteristic (ROC) curve, which is a com
   - <mark>**For N classes, \( \frac{N\times(N-1)}{2}\) binary problems**</mark>
   - One-vs-One requires more calculations (than One-vs-Rest) because more binary models are created
 
-
-
-
+---
+### **<u>Correct Features</u>**
+- **Feature Selection 特征选择**
+  - Features must be relevant
+    - 相关性高的特征通常能更好地帮助模型进行预测
+  - Must have enough features
+    - 确保选择的特征数量足够，以覆盖数据的多样性和复杂性
+    - 特征过少可能导致模型**欠拟合** (Under-fitting)，无法捕捉数据中的重要模式
+  - Not too many irrelevant features
+    - 不相关的特征无助于模型预测，还可能增加模型复杂度，导致**过拟合** (Over-fitting)
+- **Feature Engineering 特征工程** 
+  ➡️ 通过创建新的特征或对现有特征进行转换来提高模型性能的过程
+  - Create new features
+    - 根据现在数据生成新特征，这些新特征可能更好地捕捉数据中的模式。
+  - Combine, split or transform
+    - Combine (组合): 将多个特征组合成一个新特征。e.g.将两个数值特征相加或相乘
+    - Split (分割): 将一个特征分割成多个特征。e.g.将一个包含多个信息的字符串特征分割成多个数值特征
+    - Transform: 对特征进行数学转换。e.g.对数值特征取对数、平方等，以减少特征的偏态或非线性关系
+  
+- 通过特征选择和特征工程，可以提高模型的预测性能，减少过拟合和欠拟合的风险，并使模型更加简洁和易于解释。
 
 
 ---
-### PREPROCESSING
-#### Empty Cells
-- Returen a new Data Frame with no empty cells
-  - `df.dropna()`
-  ```
-  df = pd.read_csv('data.csv')
-  new_df = df.dropna()
-  print(new_df.to_string())
-  ```
+## **<u>Test Data</u>**
+- Must test on unseen data before deploying algorithm
+- Split data into **training** (often 70-80% ) and **test** (often 20-30% ) sets
+- Don't touch test set until final algorithm created
+  - <div style="color: grey; ">This helps prevent overfitting and ensures that the test set provides an unbiased evaluation of the model's performance</div>
+- Use just once to measure performance of final algorithm
+  - Repeated use of the test set for tuning or validation can lead to overfitting and an inaccurate assessment of the model's **generalization ability**
+
+How do we know how the model will perform on new data if we can’t test on the test data?
+Reply on **validation techniques** during development, here's how it works:
+- **Cross-Validation** (e.g., k-fold):
+  - Split the training data into ***k*** subsets. Train the model ***k*** times, each time using ***k*** subsets for training and ***1*** subset for validation.
+  - This provides an average performance metric (e.g., accuracy, F1-score) that estimates how the model generalizes to unseen data.
+  - 交叉验证是一种评估模型性能的方法。它将数据集分成多个子集（称为“折”），并在不同的子集上训练和测试模型，以确保结果的稳定性和可靠性。
+- **Hold-Out Validation Set**
+  - Divide the data into **training**, **validation**, and **test** sets
+  - Use the validation set to **tune hyperparameters** and **monitor performance** during training
+  - This mimics testing on unseen data without touching the final test set. (模拟了在不接触最终测试集的情况下对看不见的数据进行测试)
+- Why Avoid the Test Set Early?
+  - The test set acts as a "final exam" to evaluate the model’s **true generalization** (真实泛化能力)
+  - Using it prematurely (e.g., for hyperparameter tuning) risks overfitting to the test data, inflating performance estimates (可能会过度拟合测试数据，从而夸大性能估计)
+- Parameter Grid 参数网格
+  - 参数网格是一个字典，其中键是模型的参数名，值是一个包含可能参数值的列表。它定义了你想要尝试的所有参数组合。
+
+---
+### **<u>Validation data</u>** 验证数据
+- Need a measure of how model will perform on unseen data before we use the test data
+  - <div style="color: grey">验证集用于调整模型的参数和评估模型的性能
+  - <div style="color: grey">测试集用于最终评估模型的泛化能力
+- Split data again
+  - Corss-validation or validation set 交叉验证或验证集
+    - <div style="color: grey">将训练集分成多个小的子集，每次用一个子集作为验证集，其余子集作为训练集
+    - <div style="color: grey">通过多次重复该过程以更全面地评估模型的性能
+    - <div style="color: grey">从训练集中划分出一部分数据作为验证集，用于调整模型的超参数和评估模型的性能
+- Use multiple times to tune algorithm 调整算法
+  - The algorithm starts to learn this data too
+
+Key Takeaway:
+Validation techniques (cross-validation, hold-out validation) **provide reliable estimates** of model performance on new data, ensuring the test set remains pristine for unbiased evaluation. <div style="color: grey; ">验证技术（交叉验证、保持验证）提供了对新数据模型性能的可靠估计，确保测试集保持原始状态，以便进行无偏评估</div>
+
+**There are 3 properties necessary for a good training and validation strategy:**
+- Train the model on a large proportion of the dataset. Otherwise we’ll fail to read and recognise underlying trends in the data, resulting in underfitting. 在很大一部分数据集上训练模型。否则，我们将无法读取和识别数据中的潜在趋势，从而导致拟合不足。
+- Need a good number of validation data points or we might fail to detect overfitting. 需要大量的验证数据点，否则我们可能无法检测到过拟合。
+- Iterate on the training and validation process multiple times, using various training and validation dataset distributions, to be confident in validating model effectiveness properly. 使用各种训练和验证数据集分布多次迭代训练和验证过程，以确保正确验证模型的有效性。
+
+**K-fold cross validation is a method that addresses all three**
+  - Choosing K is a tradeoff; 5 and 10 are commonly used. 选择K是一种权衡；5和10是常用的
+  - Disadvantage: the increased computational cost (计算成本较高，因为需进行K次训练和验证，特别是在数据集大或模型复杂的情况下)
+
+### **<u>K-fold cross-validation</u>  K折交叉验证** 
+- It helps ensure that the model generalizes well to unseen data by using different portions of the dataset for training and testing in multiple iterations. 
+- Randomly split your entire dataset into ***K*** ”folds” 将整个数据集随机拆分为K个“折叠”
+- For each fold in your dataset, build your model on ***K–1*** folds of the dataset 对于数据集中的每个折叠，在数据集的K-1个折叠上构建模型
+- Then, test the model to check the effectiveness for ***Kth*** fold 测试模型以检查第K次折叠的有效性
+- Record the error you see on each of the predictions 记录您在每个预测中看到的错误
+- Repeat this until each of the folds has served as the test set 重复此操作，直到每个fold都作为测试集
+- The ***average of K recorded errors*** is called the ***cross-validation error*** and will serve as your **performance metric** for the model K个记录错误的平均值称为交叉验证错误，将作为模型的性能指标
+  
+【K-Fold Cross-Validation vs. Train-Test Split】
+- Train-Test Split (Image by Vinod Chugani)
+  - ![Train-Test Split (Image by Vinod Chugani)](pic_ML/test_split_illustration.png)
+- K-Fold Cross-Validation (Image by Vinod Chugani)
+  - ![K-Fold Cross-Validation (Image by Vinod Chugani)](pic_ML/5-Fold_Cross-Validation.png)
+
+[A Comprehensive Guide to K-Fold Cross Validation](https://www.datacamp.com/tutorial/k-fold-cross-validation)
 
 
-
-
-
-
+None of the models produced in cross validation are the final model.
+- <div style="color: grey">交叉验证中的模型不是最终模型，因为它们只基于部分数据训练，无法充分利用所有信息
+Use the best hyper-parameters from CV
+- <div style="color: grey">通过交叉验证，我们可以选择最佳的超参数，比如正则化强度或树的深度。这些超参数是在多个数据子集上表现一致的组合
+- retrain on the whole training set to get your final model <div style="color: grey">确定最佳超参数后，使用这些参数在完整训练集上重新训练模型，以获得最终模型
 
 
 ---
@@ -809,7 +689,112 @@ This graph shows a Receiver Operating Characteristic (ROC) curve, which is a com
 - 为什么标准化可以提高算法的收敛速度和性能？
   - 想象你在爬山，想找到山顶。如果你的步子大小不一（特征尺度不同），你可能会在某些方向上迈得太大，在另一些方向上迈得太小，导致你绕了很多弯路才找到山顶。而如果你的步子大小一致（特征尺度统一），你就能更直接地找到山顶。在机器学习中，标准化就像是让所有特征的“步子”大小一致，这样模型在学习时可以更快地找到最佳解，减少迭代次数，提高效率。   
 
-#### XGBoost
+---
+## **<u>Fine tuning models</u> 模型微调** 
+Fine-tuning involves the process of adjusting the hyperparameters of a model to improve its performance.
+- **Parameters** are learnt by the model <div style="color: grey">参数是模型在训练过程中学习到的变量。这些是模型的内部变量，通过调整来最小化损失函数
+- Hyper Parameters are set by user <div style="color: grey">超参数是用户在训练过程开始之前设置的变量。这些是控制学习过程和模型结构的外部变量</div>
+  - hyperparameters are not learned from the data
+  - hyperparameters are the setting that are manually specified before the training process begins
+  - hyperparameters control the learning process and the structure of the model
+  - examples of hyperparameters: gradient descent, the number of layers in a neural network, or the max depth of a decision tree.
+- Fine-tune algorithms by finding a good set of hyper-parameters
+- 模型微调方法
+  - 网格搜索: 系统地尝试指定范围内的所有可能的超参数组合。虽然计算成本高，但可以确保找到最佳组合。
+  - 随机搜索: 从指定分布中随机采样超参数组合。计算成本较低，通常比网格搜索更高效地找到好的超参数
+  - 贝叶斯优化: 使用概率模型来指导搜索最优超参数。在高维超参数空间中比网格和随机搜索更高效
+  - 交叉验证: 通常与超参数调优结合使用，以确保模型性能在不同数据子集上公平且一致地评估。
+- 模型微调步骤
+  - 定义超参数空间: 确定要调优的超参数，并为每个超参数指定值的范围
+  - 选择调优方法: 选择搜索超参数空间的方法（例如，网格搜索、随机搜索、贝叶斯优化）
+  - 评估模型性能: 使用交叉验证评估每组超参数的模型性能。
+  - 选择最佳超参数: 选择在验证集上表现最佳的超参数。
+  - 重新训练模型: 使用最佳超参数在完整训练集上重新训练模型，以获得最终模型。
+
+### **[Grid Search]([https://scikit-learn.org/stable/modules/grid_search.html](https://scikit-learn.org/stable/modules/grid_search.html#exhaustive-grid-search))**
+- operates by constructing a grid of hyperparameter values and evaluating the model performance for each point on the grid
+- **exhaustively/systematically** tests all possible combinations of hyperparameters to find the best model configuration
+- key features:
+  - finds **optimal hyperparameters** of a model which results in the most '**accurate**' predictions
+  - fully automated and exhaustive search over specified parameter values
+  - can be parallelized across multiple computational resources
+  - easy to use and interpret
+- Benefits and Use cases
+  - Effectiveness: **Ideal for smaller data sets and fewer parameters**
+  - Automation: **Minimized manual intervention** in tuning the model
+  - Configurability: Allows control over the desired combinations of hyperparameters
+- Challenges and Limitations
+  - computationally expensive: high time resource consumption with increasing dimensions
+  - inefficiency with high-dimensional data: it suffers from the "curse of dimensionality"
+  - less suitable for larger, high-dimensional data sets
+
+### **Random Search**
+- an approach to parameter tuning that will **sample algorithm configurations from a random distribution** (i.e. uniform) for a **fixed number of iterations**
+- not all given parameter values are tried out in Randomized Search, rather **a fixed number of parameter settings is sampled from the specified distributions** 
+
+### **Bayesian Optimization**
+- a **sequential** design strategy for **global optimization of black-functions** that works by **building a probability model of the objective function** and using it to select the **most promising** hyperparameters to evaluate
+
+---
+### **Notation**
+- We use upper case bold letters for matrices, \(\mathbf{A}, \mathbf{B}, \mathbf{C}, \mathbf{X}, \ldots\)
+- Matrix elements: corresponding lowercase with two indices \(a_{mq}, b_{rs}, c_{tu}, x_{ij}, \ldots\)
+- for the “data matrix” or the “feature matrix” \(\mathbf{X}\)
+  - \(x_{ij}\) is the element in row \(i\) and column \(j\) of the matrix \(\mathbf{X}\)
+- Columns contain features / variables
+  - <img src="pic_ML/features.png" style="width: 40%; max-width: 50%" />
+- Rows contain observations
+  - X = 
+$$
+\begin{pmatrix}
+X_{11} & X_{12} & \cdots & X_{1p} \\
+X_{21} & X_{22} & \cdots & X_{2p} \\
+\vdots & \vdots & \ddots & \vdots \\
+X_{n1} & X_{n2} & \cdots & X_{np}
+\end{pmatrix}
+$$
+
+### **Matrix 矩阵**
+- 定义: 矩阵用大写加粗字母表示，例如 A,B,C,X,…。
+- 用途: 这些符号用于在数学表达式和方程中表示矩阵。矩阵是线性代数中的基本数据结构，在数据挖掘和机器学习中广泛用于表示数据、特征和变换。
+
+**矩阵元素**
+- 定义: 矩阵的元素用相应的小写字母加上两个下标表示，例如 a<sub>mq</sub>, b<sub>rs</sub>, c<sub>tu</sub>, x<sub>ij</sub> ,…
+- 用途: 这些下标表示元素在矩阵中的位置。例如，a<sub>mq</sub> 表示矩阵 A 中第 m 行第 q 列的元素。这种表示法在进行矩阵运算或访问特定数据点时非常重要。
+
+**数据矩阵或特征矩阵**
+- 定义: 矩阵 X 通常用于表示数据矩阵或特征矩阵。
+- 用途: 在数据挖掘和机器学习中，数据矩阵 X 通常包含数据点的特征值。矩阵 X 的每一行表示一个数据点，每一列表示一个特征。例如，x<sub>ij</sub> 是矩阵 X 中第 i 行第 j 列的元素，表示第 i 个数据点的第 j 个特征值。
+
+- We use lower case bold letters for vectors, ***y***, ***x***
+- A vector is a matrix with only
+  - one row (a row vector) or,
+  - one column (a column vector)
+- If not specified, a vector will be a column vector
+- Use italic letters for scalar values(标量值), ***i***, ***y***, ***p***
+- Transpose operator(转置算子): superscript ***T***（上标T）
+  - <img src="pic_ML/transpose_operator.png" style="width: 40%; max-width: 50%" />
+
+### **Supervised Learning Notation**
+***y*** = ***f*** (***X***,***θ***) + ***ϵ***
+***y***: outcome; response; label; dimensions ***n × 1***
+***f***: a function
+***X***: data or feature matrix, dimensions ***n × p***
+***θ***: a set of “parameters”
+***ϵ***: a vector of “errors” or “noise” dimensions ***n × 1***
+
+### Inputs to training are:
+- ***X*** (a feature matrix) and,
+- ***y*** the values we want to predict
+
+### During learning:
+- try to find a function ***f*** and parameters ***θ***
+- that give results close to ***y*** when applied to ***X*** 
+- <img src="pic_ML/observation.png" style="width: 60%; max-width: 60%" />
+
+
+---
+### XGBoost
 - XGBoost：是一种基于梯度提升的机器学习算法，它通过构建多个决策树来提高预测的准确性和性能。
 - XGBRegressor：XGBRegressor 是 XGBoost 库中专门用于回归问题的类。
 - 通过构建多个决策树逐步修正预测错误，预测性能强大，但解释性较差。
