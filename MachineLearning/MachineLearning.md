@@ -264,7 +264,7 @@ Use the best hyper-parameters from CV
 - retrain on the whole training set to get your final model <div style="color: grey">确定最佳超参数后，使用这些参数在完整训练集上重新训练模型，以获得最终模型
 
 
-#### **<u>Fine tuning models</u> 模型微调** 
+### **<u>Fine tuning models</u> 模型微调** 
 Fine-tuning involves the process of adjusting the hyperparameters of a model to improve its performance.
 - **Parameters** are learnt by the model <div style="color: grey">参数是模型在训练过程中学习到的变量。这些是模型的内部变量，通过调整来最小化损失函数
 - Hyper Parameters are set by user <div style="color: grey">超参数是用户在训练过程开始之前设置的变量。这些是控制学习过程和模型结构的外部变量</div>
@@ -285,6 +285,29 @@ Fine-tuning involves the process of adjusting the hyperparameters of a model to 
   - 选择最佳超参数: 选择在验证集上表现最佳的超参数。
   - 重新训练模型: 使用最佳超参数在完整训练集上重新训练模型，以获得最终模型。
 
+#### **[Grid Search](https://scikit-learn.org/stable/modules/grid_search.html)**
+- operates by constructing a grid of hyperparameter values and evaluating the model performance for each point on the grid
+- **exhaustively/systematically** tests all possible combinations of hyperparameters to find the best model configuration
+- key features:
+  - finds **optimal hyperparameters** of a model which results in the most '**accurate**' predictions
+  - fully automated and exhaustive search over specified parameter values
+  - can be parallelized across multiple computational resources
+  - easy to use and interpret
+- Benefits and Use cases
+  - Effectiveness: **Ideal for smaller data sets and fewer parameters**
+  - Automation: **Minimized manual intervention** in tuning the model
+  - Configurability: Allows control over the desired combinations of hyperparameters
+- Challenges and Limitations
+  - computationally expensive: high time resource consumption with increasing dimensions
+  - inefficiency with high-dimensional data: it suffers from the "curse of dimensionality"
+  - less suitable for larger, high-dimensional data sets
+
+#### **Random Search**
+- an approach to parameter tuning that will **sample algorithm configurations from a random distribution** (i.e. uniform) for a **fixed number of iterations**
+
+#### **Bayesian Optimization**
+- a **sequential** design strategy for **global optimization of black-functions** that works by **building a probability model of the objective function** and using it to select the **most promising** hyperparameters to evaluate
+
 ---
 ### **Notation**
 - We use upper case bold letters for matrices, \(\mathbf{A}, \mathbf{B}, \mathbf{C}, \mathbf{X}, \ldots\)
@@ -303,7 +326,6 @@ X_{21} & X_{22} & \cdots & X_{2p} \\
 X_{n1} & X_{n2} & \cdots & X_{np}
 \end{pmatrix}
 $$
-
 
 
 **矩阵**
