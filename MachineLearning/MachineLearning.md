@@ -351,7 +351,8 @@
 
 ---
 ---
-## Regression
+# Regression
+－ **[Linear Regression](https://www.analyticsvidhya.com/blog/2021/10/everything-you-need-to-know-about-linear-regression/)**
 - Regression is predicting a number.
 - We could calculate the sum of the differences between the real and predicted values
   - Real value \( y_i \) (实际值)
@@ -416,15 +417,16 @@
   - \( R^2 \) 局限性，例：不能区分模型的预测值与实际观测值之间的线性关系和非线性关系
 
 ---
-## Classification
+# Classification
 - Classification can either be
   - binary (2 classes)
   - multiclass (more than 2 classes)
 - Some methods of measuring performance can be used for both
   - Some are either binary only or multiclass only
 - First we look at methods that can be used for either
+- 
 
-### **<u>Binary Classification<u>**
+**Binary Classification**
 - Only two categories
 
 ---
@@ -445,6 +447,13 @@
   - Predict positive, actual class negative, false positive, \(FP\), type I errors
   - Predict negative, actual class negative, true negative, \(TN\)
   - Predict negative, actual class positive, false negative, \(FN\), type II errors
+- How to calculate a confusion matrix for a 2-class classification problem
+  |             |                     Predicted Value                             |
+  |             |----------------------|---------------------|--------------------|
+  |             |                      | **Positive (P)**    | **Negative (N)**   |
+  |             |----------------------|---------------------|--------------------|
+  | Actual      | **True (T)**         | True positive (TP)  | False negative (FN)|
+  | value       | **False (F)**        | False positive (FP) | True negative (TN) |
 
 ---
 ### Accuracy
@@ -460,6 +469,7 @@
 - True Positive Rate (TPR)
 - Percent of actual positives that are correct <div style="color: grey;"> 召回率是指在所有实际为正类的样本中，被模型正确识别的比例。
 - Higher recall indicates fewer false negatives <div style="color: grey;">召回率越高，表示模型的漏报（False Negatives）越少
+- Recall is important in **medical cases** where it doesn’t matter whether we raise a false alarm, but the actual positive cases should not go undetected!
 
 <mark>**Precision = \( \frac{TP}{TP+FP} \)**</mark>
 - Precision, also known as:
@@ -483,25 +493,25 @@
 <mark>**\( F_1 = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}} \)**</mark>
 - Harmonic mean of precision and recall ➡️ ensure that the model performs well on both metrics <div style="color: grey; "> 精确度和召回率的调和平均值, 以评估模型的整体性能</div>
 - F1 是在分类问题中常用的评估指标，特别是在需要同时考虑 precision 和 recall 的情况下
+- when we try to increase the precision of our model, the recall goes down, and vice-versa. The F1-score captures both the trends in a single value
 - F1 attempts to balance these two metrics to evaluate the overall performance of the model <div style="color: grey; ">试图在precision和recall两个指标间找到平衡，以评估模型的整体性能</div>
-- Needs high precision and recall
   
   
 **The output types of a binary classifier**
 - Predictions
 - Scores
 
-<mark>**Predictions**</mark>
+**Predictions**
 - Refer to the classifier directly outputting a class label <div style="color: grey; ">分类器直接输出一个类别标签</div>
 - For binary classification problems, the output is typically "True" or "False", "Yes" or "No", "0" or "1" <div style="color: grey; ">对于二元分类问题，输出通常是“是”或“否”、“真”或“假”、“0”或“1”</div>
 - Suitable for scenarios where a clear classification result is needed, such as spam email detection (spam/non-spam)<div style="color: grey; ">适用于需要明确分类结果的场景，例如垃圾邮件检测（垃圾邮件/非垃圾邮件）</div>
 
-<mark>**Scores**</mark>
+**Scores**
 - Refers to the classifier outputting a **continuous value** representing the **probability** or **confidence** that a sample belongs to a certain class<div style="color: grey; ">分数是指分类器输出一个连续值，表示样本属于某一类别的概率或置信度
 - The range of scores can be from **negative infinity** to **positive infinity**, or from **0 to 1**. For example, logistic regerssion models typically output a probability value between 0 and 1<div style="color: grey; ">分数的范围可以是从负无穷到正无穷，或者从0到1。例如，逻辑回归模型通常会输出一个介于0和1之间的概率值
 - Suitable for scenarios where the confidence of classification is needed, or where scores need further processing, such as setting a threshold for classfication <div style="color: grey; ">这种输出方式适用于需要了解分类置信度的场景，或者需要进一步处理分数的情况，如设置阈值进行分类
 
-<mark>**Receiver Operator Characteristic (ROC) Curve**</mark>
+**[Receiver Operator Characteristic (ROC) Curve](https://www.analyticsvidhya.com/blog/2020/06/auc-roc-curve-machine-learning/#h-what-is-the-auc-roc-curve)**
  ![ROC](pic_ML/ROC.png)
 This graph shows a Receiver Operating Characteristic (ROC) curve, which is a common method for evaluating the performance of a binary classification model. The graph displays the ROC curve for a cat versus dog classification example. In this graph:
 - **X-axis** 
@@ -829,9 +839,16 @@ $$
 - that give results close to ***y*** when applied to ***X*** 
 - <img src="pic_ML/observation.png" style="width: 60%; max-width: 60%" />
 
+---
+# Algorithm
 
 ---
-### XGBoost
+## [SVM](https://www.analyticsvidhya.com/blog/2020/03/support-vector-regression-tutorial-for-machine-learning/)
+- widely used in ML for classification
+- can also be applied to regression through **Support Vector Regression (SVR)**
+
+---
+## XGBoost
 - XGBoost：是一种基于梯度提升的机器学习算法，它通过构建多个决策树来提高预测的准确性和性能。
 - XGBRegressor：XGBRegressor 是 XGBoost 库中专门用于回归问题的类。
 - 通过构建多个决策树逐步修正预测错误，预测性能强大，但解释性较差。
