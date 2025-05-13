@@ -1,8 +1,8 @@
 # MACHINE LEARNING Study Notes
 
-## Some terminologies
+# Some terminologies
 
-#### **<u>Supervised Learning**</u>：
+**<u>Supervised Learning**
 - The model learns from labeled training data
 - Common superviesd learning tasks include: **Classification** and **Regression**
 - For supervised learning the training data always contains labels
@@ -35,7 +35,7 @@
   - **Neural Networks**
     - models inspired by the structure of the human brain and can be used for various complex classification and regression tasks
 
-#### **<u>Unsupervised Learning**</u>
+**<u>Unsupervised Learning**
 - For handling unlabeled data
 - Model objective：to **discover patterns and structures** in the data
 - Important in **data exploration**, **pattern recognition**, and **data preprocessing**, and is widely used in customer segmentation, image segmentation, gene data analysis, etc. (在数据探索、模式识别和数据预处理等方面非常重要，广泛应用于客户细分、图像分割、基因数据分析等领域。)
@@ -58,7 +58,7 @@
     - Selects the **eigenvectors with the largest variance** as the principal components (选择方差最大的几个特征向量作为主成分)
 
 
-#### **<u>Semi or Self Supervised Learning</u>**
+**Semi or Self Supervised Learning**
 - Partially labelled training dataset
   - ∵ acquiring a large amount of labeled data is costly and time-consuming, while unlabeled data is relatively easy to obtain
 - Usually combines supervised and unsupervised algorithm
@@ -66,13 +66,13 @@
 - Useful in fields such as: image recognition, natural language processing, and speech recognition
 - Significantly improve the performance of the model, especially when labeled data is scarce (在标记数据稀缺的情况下，提升模型的性能)
 
-#### **<u>Batch Learning</u>**
+**Batch Learning**
 - A large mount of data is available at once
 - Train offline and then use in production
 - Takes a lot of resources and memory
 - Suitable for scenarios where large amounts of data are available and real-time model updates are not required
 
-#### **<u>Online Learning</u>**
+**Online Learning**
 - System trained incrementally
   - Online learning models process a small portion of data at a time and update the model gradually, instead of training on all data at once
 - System continues learning during production
@@ -87,8 +87,7 @@
   - Since models are constantly updating, their performance needs to be continuously monitored to ensure accuracy and reliability
 - Suitable for handling large-scale, dynamically changing data
 
-
-#### **<u>Instance Based Learning</u>**
+**Instance Based Learning**
 - Also known as lazy learning or memory-based learning
 - Makes predictions or classifications based on the **similarity between new instances and the training examples**
 - Instead of learning a general model from the training data, instance-based learning stores the training instances and uses them directly for **inference** when new instances are encountered
@@ -120,7 +119,7 @@
   - can be computationally expensive <div style="color: grey"> (especially when dealing with large datasets, as it requires searching through the entire training data for each prediction)
   - is sensitive to noisy or irrelevant features, and it may struggle with high-dimensional data
 
-#### **<u>Model Based Learning</u>**
+**Model Based Learning**
 - Also known as eager learning
 - build a model from the known data
 - Use the model to make **predictions** for unknown data
@@ -132,9 +131,8 @@
   - **Applying the model**: Using the constructed model to make predictions on unknown data
   - **Evaluating the model**: Assessing the model's performance by defining metrics like accuracy, recall, F1 score, mean squared error, etc.
 
-
 ---
-## Reasons to use ML
+# Reasons to use ML
 - Existing solutions require extensive fine tuning: 现有解决方案需要广泛的微调
   - <div style="color: grey;">传统解决方案可能需要大量手动调整和优化才能达到满意的性能。机器学习算法能自动调整参数，减少人工干预的需求。</div>
 - Problem too complex for traditional approach: 问题过于复杂，传统方法难以应对
@@ -149,8 +147,8 @@
   - <div style="color: grey;">机器学习算法能处理/分析大量数据，从中提取有用的信息/洞察。这对于理解复杂现象、发现隐藏的关联和趋势非常有用。</div>
 
 ---
-## Challenges for ML
-### What affects the performance of a machine learning algorithm?
+# Challenges for ML
+## What affects the performance of a machine learning algorithm?
 | **Reason**              | **Specific**                                                                                                                                                    |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bad data                | - not enough data </br> - not representative data </br> - poor quality </br> - poor features                                                                    |
@@ -160,7 +158,7 @@
 | Bad algorithms          | - over fitting </br> - under fitting                                                                                                                            |
 
 ---
-## What can machine learning use for?
+# What can machine learning use for?
 - Forecasting future revenue based on performance metrics: 基于绩效指标预测未来收入
 - Calculating online insurance quotes: 计算在线保险报价
 - Detecting fraudulent bank transactions: 检测欺诈性银行交易
@@ -170,9 +168,8 @@
 - Recommendation algorithms: 推荐算法
 
 ---
-### **ML Project Structure** 
-
-#### **Steps in an ML Project** 
+# **ML Project Structure** 
+## **Steps in an ML Project** 
 - Look at the big picture
   - Objective: Understand the overall goals and context of the project
   - Activities: Define the problem statement, identify the business objectives, and set clear success metrics.
@@ -195,7 +192,7 @@
   - Objective: Deploy the model into production and ensure it continues to perform well over time
   - Activities: Deploy the model, set up monitoring systems to track its performance, and perform regular maintenance and updates as needed
 
-#### **Frame the solution** 
+### **Frame the solution** 
 - Supervised / Unsupervised
   - 监督学习：使用带标签的数据训练模型，每个样本都有对应的输出标签，目标是学习输入特征与输出标签之间的映射关系，进行准确预测。常见任务包括分类和回归。
   - 无监督学习：使用没标签的数据，目标是发现数据中的结构和模式，常见任务包括聚类和降维。
@@ -208,7 +205,7 @@
 - How will solution be used
   - 确定模型的类型和学习方式后，考虑解决方案的具体应用场景，包括模型的部署方式、用户交互方式以及模型的维护和更新策略。
 
-#### **Performance** 
+**Performance** 
 - Measure the performance
   - Select appropriate evaluation metrics based on the task type
     - For classification, use metrics like accuracy, precision, recall, and F1-score
@@ -218,8 +215,7 @@
 - Does the performance meet the business objective?
   - Ensure the model’s performance aligns with the business goals. If the model doesn’t help achieve these goals, it may not be useful despite good metrics.
 
-
-#### **Data Exploration** 
+### **Data Exploration** 
 - Use the TRAINING SET for exploration
 - What is your validation strategy?
   - Common strategies include hold-out validation and cross-validation. This helps prevent overfitting and ensures the model generalizes well.
@@ -255,7 +251,7 @@
   - Adding more relevant data can improve model performance
   - Identify what extra data might be useful as part of the exploration process
 
-#### **Data Wrangling** 
+### **Data Wrangling** 
 **Prepare the Data**
 - Keep the original data intact
   - ensures that you can revert to the original data if needed and prevents data loss or corruption
@@ -298,7 +294,7 @@
   - Scale features to ensure they are on a similar scale, which can improve the performance of many ML algorithms
     - Center / standardise / normalise: Centering (subtracting the mean) and standardizing (dividing by the standard deviation) or normalizing (scaling to a specific range) are common techniques to achieve this <div style="color: grey; ">中心化/标准化/归一化: 中心化（减去均值）和标准化（除以标准差）或归一化（缩放到特定范围）是常见的技术</div>
 
-#### **Train the Select Models** 
+### **Train the Select Models** 
 - Train different models with standard parameters
   - Train various models (e.g., linear regression, decision trees, neural networks) using their default settings to establish a baseline performance
   - Assess using validation: Evaluate the models using validation techniques (e.g., cross-validation) to estimate their generalization performance on unseen data
@@ -314,7 +310,7 @@
 - Can use a subset of data, but penalises complex models
   - Use a subset of the data during initial stages, but adjust for this by penalizing complex models to prevent overfitting
 
-#### **Fine Tune the System** 
+### **Fine Tune the System** 
 - Fine tune hyper parameters including preprocessing
   - Hyper Parameters
     - parameters whose values are set prior to the commencement of the learning process
@@ -343,7 +339,7 @@
   - Final Evaluation
     - After fine-tuning the model and possibly using ensemble methods, the final model is evaluated on the test dataset to get an estimate of its performance on unseen data
 
-#### **Present the solution**
+### **Present the solution**
 - Remember big picture from step 1
 - How the model meets business objective
 - Describe interesting findings along the way
@@ -355,7 +351,7 @@
 
 ---
 ---
-### **<u>Regression</u>**
+## Regression
 - Regression is predicting a number.
 - We could calculate the sum of the differences between the real and predicted values
   - Real value \( y_i \) (实际值)
@@ -370,8 +366,11 @@
 - <mark>**MSE</mark> = <mark>\( \frac{1}{n} \sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^{2} \)**</mark>  ➡️ Mean Squared Error 均方误差
   - 作用：用于<mark>衡量模型的预测精度，值越小说明模型预测越准确<mark>
 - <mark>**RMSE</mark> = <mark>\( \sqrt{\frac{1}{n} \sum_{i=1}^{n} \left(y_{i} - \hat{y}_{i} \right)^{2}} \)**</mark>  ➡️  
-    - Root Mean Square Error (RMSE), 均方根误差, 是回归模型评估的核心指标之一
-- MSE 和 RMSE 都涉及误差的平方，因此对异常值（即远离平均值的点）非常敏感。异常值会导致误差平方增大，从而显著影响 MSE 和 RMSE 的值
+  - Root Mean Square Error (RMSE), 均方根误差, 是回归模型评估的核心指标之一
+- MSE and RMSE ➡️
+  - Used to measure the difference between the model's predicted values and the actual values
+  - sensitive to outliers
+  - a single large error can significantly increase the MSE/RMSE
 - RMSE 是通过取 MSE 的平方根，将误差值转换到与原始数据相同的量纲上，从而便于理解和比较误差的大小
  
 - <mark>**Euclidean norm, \( L_2 \) norm, \( ||\cdot||_2 \)**</mark>
@@ -417,7 +416,7 @@
   - \( R^2 \) 局限性，例：不能区分模型的预测值与实际观测值之间的线性关系和非线性关系
 
 ---
-### **Classification**
+## Classification
 - Classification can either be
   - binary (2 classes)
   - multiclass (more than 2 classes)
@@ -425,17 +424,27 @@
   - Some are either binary only or multiclass only
 - First we look at methods that can be used for either
 
-#### **B<u>inary Classification<u>**
+### **<u>Binary Classification<u>**
 - Only two categories
-- Predict positive, actual class positive, true positive, \(TP\)
-- Predict positive, actual class negative, false positive, \(FP\), type I errors
-- Predict negative, actual class negative, true negative, \(TN\)
-- Predict negative, actual class positive, false negative, \(FN\), type II errors
 
 ---
-### **<u>Confusion Matrix</u>**
+### [Confusion Matrix](https://www.analyticsvidhya.com/blog/2020/04/confusion-matrix-machine-learning/#What_Is_a_Confusion_Matrix?)
+- a performance evaluation tool in ML
+- an N x N matrix used for **evaluating the performance** of a classification model
+  - N: the total number of target classes
+- This matrix aids in:
+  - analyzing model performance,
+  - identifying mis-classifications,
+  - improving predictive accuracy
+- The matrix **compares the actual target values with those predicted** by the ML model
+- There are many ways to assess the classification model, but the confusion matrix is one of the most reliable options
 - Can be any number of classes
 - Do not need to be ordered (low, med, high)
+- Terms in Confusion Matrix:
+  - Predict positive, actual class positive, true positive, \(TP\)
+  - Predict positive, actual class negative, false positive, \(FP\), type I errors
+  - Predict negative, actual class negative, true negative, \(TN\)
+  - Predict negative, actual class positive, false negative, \(FN\), type II errors
 
 ---
 ### Accuracy
@@ -540,7 +549,7 @@ This graph shows a Receiver Operating Characteristic (ROC) curve, which is a com
   - For precision-recall curves, the AUC for a random classifier depends on the proportion of positive samples in the overall sample. This is because, under random guessing, the model's precision and recall will be related to the proportion of positive samples <div style="color: grey; ">对于精确率-召回率曲线，随机分类器的AUC值取决于正类样本在总体样本中的比例。这是因为在随机猜测的情况下，模型的精确率和召回率将与正类样本的比例相关</div>
 .
 
-#### **<u>Multiclass</u>**
+### **<u>Multiclass</u>**
 - Split into multiple binary problems
 - Take an average or weighted average of binary measures
 - ***One-vs-Rest*** also called ***One-vs-All***
@@ -561,7 +570,7 @@ This graph shows a Receiver Operating Characteristic (ROC) curve, which is a com
   - One-vs-One requires more calculations (than One-vs-Rest) because more binary models are created
 
 ---
-### **<u>Correct Features</u>**
+## **<u>Correct Features</u>**
 - **Feature Selection 特征选择**
   - Features must be relevant
     - 相关性高的特征通常能更好地帮助模型进行预测
@@ -692,18 +701,33 @@ Use the best hyper-parameters from CV
 ---
 ## **<u>Fine tuning models</u> 模型微调** 
 Fine-tuning involves the process of adjusting the hyperparameters of a model to improve its performance.
-- **Parameters** are learnt by the model <div style="color: grey">参数是模型在训练过程中学习到的变量。这些是模型的内部变量，通过调整来最小化损失函数
-- Hyper Parameters are set by user <div style="color: grey">超参数是用户在训练过程开始之前设置的变量。这些是控制学习过程和模型结构的外部变量</div>
-  - hyperparameters are not learned from the data
-  - hyperparameters are the setting that are manually specified before the training process begins
-  - hyperparameters control the learning process and the structure of the model
-  - examples of hyperparameters: gradient descent, the number of layers in a neural network, or the max depth of a decision tree.
+
+**Parameters** are learnt by the model <div style="color: grey">参数是模型在训练过程中学习到的变量。这些是模型的内部变量，通过调整来最小化损失函数
+
+**Hyper Parameters** are set by user <div style="color: grey">超参数是用户在训练过程开始之前设置的变量。这些是控制学习过程和模型结构的外部变量</div>
+- hyperparameters are not learned from the data
+- hyperparameters are the setting that are manually specified before the training process begins
+- hyperparameters control the learning process and the structure of the model
+- examples of hyperparameters: gradient descent, the number of layers in a neural network, or the max depth of a decision tree.
+
+**hyperparameter tuning**
+- the process of searching the most accurate hyperparameters for a dataset with a ML algorithm  ➡️  fit and evaluate the model by changing the hyperparameters one by one repeatedly until we find the best accuracy
+- It optimizes ML models for maximum efficiency and accuracy, leading to more reliable predictions and better decision-making
+- Benifits of hyperparameter tuning:
+  - improves model performance
+  - automates the manual process of parameter tuning
+  - prevents model overfitting or underfitting
+- Challenges of hyperparameter tuning:
+  - can entail high computational costs and time consumption
+  - it doesn't guarantee finding the global optimum
 - Fine-tune algorithms by finding a good set of hyper-parameters
+
 - 模型微调方法
   - 网格搜索: 系统地尝试指定范围内的所有可能的超参数组合。虽然计算成本高，但可以确保找到最佳组合。
   - 随机搜索: 从指定分布中随机采样超参数组合。计算成本较低，通常比网格搜索更高效地找到好的超参数
   - 贝叶斯优化: 使用概率模型来指导搜索最优超参数。在高维超参数空间中比网格和随机搜索更高效
   - 交叉验证: 通常与超参数调优结合使用，以确保模型性能在不同数据子集上公平且一致地评估。
+
 - 模型微调步骤
   - 定义超参数空间: 确定要调优的超参数，并为每个超参数指定值的范围
   - 选择调优方法: 选择搜索超参数空间的方法（例如，网格搜索、随机搜索、贝叶斯优化）
@@ -714,6 +738,8 @@ Fine-tuning involves the process of adjusting the hyperparameters of a model to 
 ### **[Grid Search]([https://scikit-learn.org/stable/modules/grid_search.html](https://scikit-learn.org/stable/modules/grid_search.html#exhaustive-grid-search))**
 - operates by constructing a grid of hyperparameter values and evaluating the model performance for each point on the grid
 - **exhaustively/systematically** tests all possible combinations of hyperparameters to find the best model configuration
+- selects the hyperparameter combination that performs the best in cross-validation
+  － “best” is typically based on a specific performance metric, such as MSE, RMSE, or accuracy, etc.
 - key features:
   - finds **optimal hyperparameters** of a model which results in the most '**accurate**' predictions
   - fully automated and exhaustive search over specified parameter values
@@ -730,10 +756,21 @@ Fine-tuning involves the process of adjusting the hyperparameters of a model to 
 
 ### **Random Search**
 - an approach to parameter tuning that will **sample algorithm configurations from a random distribution** (i.e. uniform) for a **fixed number of iterations**
-- not all given parameter values are tried out in Randomized Search, rather **a fixed number of parameter settings is sampled from the specified distributions** 
+- A tuning technique that samples random combinations of hyperparameters, allowing for a controlled execution time
+- not all given parameter values are tried out in Randomized Search, rather **a fixed number of parameter settings is sampled from the specified distributions**
+- Drawback of Random Search:
+  - sometimes misses important points (values) in the search space
 
-### **Bayesian Optimization**
+### **[Bayesian Optimization](https://www.analyticsvidhya.com/blog/2021/05/bayesian-optimization-bayes_opt-or-hyperopt/#h-what-is-bayesian-optimization)**
 - a **sequential** design strategy for **global optimization of black-functions** that works by **building a probability model of the objective function** and using it to select the **most promising** hyperparameters to evaluate
+- a technique used to find the best possible setting (minimum or maximum) for a function, especially when the function is complex, expensive to evaluate, or random
+- Advantages of Bayesian Optimization:
+  - Reduced Evaluation Cost: by strategically choosing which hyperparameter combinations to evaluate, it saves time and resources compared to exhaustive search methods like grid search
+  -  
+
+---
+## **Loss Function**
+- The measure of how well a ML model is able to predict the correct output
 
 ---
 ### **Notation**
@@ -811,3 +848,41 @@ $$
   - 高效性：XGBoost 使用高效的算法和数据结构，能够快速处理大规模数据。
   - 灵活性：支持多种参数调整，可以根据具体问题进行优化。
   - 鲁棒性：对缺失值和异常值具有较好的鲁棒性。
+ 
+---
+# Data Mining Project Presentation
+- **Introduction, the methodologies we employed, and the insights we've gained.**
+- **What We've Done So Far**
+  - **Problem Definition:
+    - We started by clearly defining the problem we aimed to solve. This involved understanding the business context and identifying the key stakeholders and their objectives.
+  - Data Collection:
+    - We collected data from various sources, including [list sources if applicable], ensuring that we had a comprehensive dataset to work with.
+  - Data Preprocessing:
+    - The data underwent thorough preprocessing, which included cleaning, normalization, and transformation to prepare it for analysis.
+  - Exploratory Data Analysis (EDA):
+    - Through EDA, we gained initial insights into the data, identified patterns, and formulated hypotheses that would guide our modeling efforts.
+- **Why and How We Did It**
+  - Methodology Selection:
+    - We chose [list methodologies or algorithms used] because of their proven effectiveness in similar problems and their ability to handle the size and complexity of our dataset.
+  - Model Development:
+    - We developed several models, including [list models], and fine-tuned them using grid search and cross-validation to optimize performance.
+  - Model Evaluation:
+    - We evaluated our models using metrics such as RMSE, accuracy, and F1 score, ensuring that we selected the best-performing model.
+  - Hyperparameter Tuning:
+    - We performed hyperparameter tuning to further enhance the model's predictive power.
+- **Details of the Final Model**
+  - Model Architecture:
+    - Our final model is a [describe the model type and architecture], which was chosen for its ability to [explain why this model was chosen].
+  - Performance Metrics:
+    - The model achieved an RMSE of [insert value] on the test set, which is [good/acceptable/room for improvement] compared to the baseline.
+  - Implementation:
+    - The model was implemented using [mention the tools or programming languages used], and it is scalable and can be integrated into [mention where it will be used].
+- **What We've Learned**
+  - Key Insights:
+    - Through our analysis, we discovered [list key insights or findings].
+  - Challenges Faced:
+    - We encountered [list challenges], which we overcame by [describe how you overcame them].
+  - Lessons Learned:
+    - The project taught us the importance of [list lessons learned] in data mining.
+- **Conclusion**
+  - In conclusion, our project has provided valuable insights and a robust model that can be leveraged to [mention the impact or next steps]. We are eager to hear your feedback and discuss how we can further refine our approach.
